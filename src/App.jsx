@@ -35,7 +35,6 @@ const changelogData = [
         title: "The Final Polish",
         type: "UX",
         severity: "Enhancement",
-        files: ["index.html", "script.js"],
         icon: <CheckCircle2 size={16} />,
         changes: [
           { tag: "UX", desc: "Deletion Progress Bar", detail: "Added visual progress bar for batch deletions." },
@@ -47,7 +46,6 @@ const changelogData = [
         title: "File Compatibility Core",
         type: "Codebase",
         severity: "Major",
-        files: ["script.js", "index.html"],
         icon: <FileCode size={16} />,
         changes: [
           { tag: "Fix", desc: "MIME Type Support", detail: "Added support for .csv and .txt file picking." },
@@ -60,7 +58,6 @@ const changelogData = [
         title: "Layout & Import Logic",
         type: "UI",
         severity: "Enhancement",
-        files: ["index.html", "style.css"],
         icon: <Layout size={16} />,
         changes: [
           { tag: "UI", desc: "Responsive Header", detail: "Flexbox fix for Guest List buttons on mobile." },
@@ -73,7 +70,6 @@ const changelogData = [
         title: "Data Integrity Patch",
         type: "Fix",
         severity: "Critical",
-        files: ["script.js"],
         icon: <Database size={16} />,
         changes: [
           { tag: "Logic", desc: "Time Preservation", detail: "Ensured Arrival Time is kept during Export/Import." },
@@ -85,7 +81,6 @@ const changelogData = [
         title: "Persistence & Bulk Tools",
         type: "Feature",
         severity: "Major",
-        files: ["script.js", "index.html"],
         icon: <HardDrive size={16} />,
         changes: [
           { tag: "UX", desc: "Persistent Lock", detail: "Lock popup now persists on page refresh." },
@@ -99,7 +94,6 @@ const changelogData = [
         title: "Tier Refinement",
         type: "UI",
         severity: "Enhancement",
-        files: ["style.css", "script.js"],
         icon: <Code size={16} />,
         changes: [
           { tag: "Refactor", desc: "Theme Renaming", detail: "Renamed internal values VIP->Diamond, VVIP->Gold." },
@@ -112,7 +106,6 @@ const changelogData = [
         title: "Tiers & Notifications",
         type: "Feature",
         severity: "Major",
-        files: ["index.html", "style.css"],
         icon: <Zap size={16} />,
         changes: [
           { tag: "Feature", desc: "Ticket Tiers", detail: "Added Classic, VIP (Silver), and VVIP (Gold) themes." },
@@ -141,7 +134,6 @@ const changelogData = [
         title: "Admin UI Cleanup",
         type: "UI",
         severity: "Enhancement",
-        files: ["style.css", "script.js"],
         icon: <Users size={16} />,
         changes: [
           { tag: "UI", desc: "User Cards", detail: "Simplified cards to show 'Count Active' only." },
@@ -154,7 +146,6 @@ const changelogData = [
         title: "Scanner UX Upgrade",
         type: "Performance",
         severity: "Major",
-        files: ["script.js", "style.css"],
         icon: <Smartphone size={16} />,
         changes: [
           { tag: "Hardware", desc: "Extended Cooldown", detail: "Increased scanner lock to 4s." },
@@ -167,7 +158,6 @@ const changelogData = [
         title: "The Easter Egg",
         type: "UI",
         severity: "Enhancement",
-        files: ["script.js", "style.css"],
         icon: <Activity size={16} />,
         changes: [
           { tag: "Feature", desc: "Music Trigger", detail: "Added audio trigger to Export Data badge." },
@@ -180,7 +170,6 @@ const changelogData = [
         title: "Visual Differentiation",
         type: "UI",
         severity: "Enhancement",
-        files: ["style.css"],
         icon: <Layout size={16} />,
         changes: [
           { tag: "UI", desc: "Rainbow Badge", detail: "Added gradient badge for EXPORT_DATA." },
@@ -193,7 +182,6 @@ const changelogData = [
         title: "AI Integration",
         type: "Feature",
         severity: "Major",
-        files: ["script.js", "index.html"],
         icon: <Cpu size={16} />,
         changes: [
           { tag: "Feature", desc: "Gemini AI", detail: "Integrated AI for Status Reports & Drafting." },
@@ -206,7 +194,6 @@ const changelogData = [
         title: "Enhanced Logging",
         type: "Security",
         severity: "Major",
-        files: ["script.js", "style.css"],
         icon: <FileText size={16} />,
         changes: [
           { tag: "Data", desc: "Granular Logs", detail: "Logs now record specific usernames." },
@@ -235,7 +222,6 @@ const changelogData = [
         title: "Granular Access Control",
         type: "Security",
         severity: "Major",
-        files: ["script.js", "firestore.rules"],
         icon: <ShieldCheck size={16} />,
         changes: [
           { tag: "Security", desc: "Username Locking", detail: "Lock specific users sharing an email." },
@@ -248,7 +234,6 @@ const changelogData = [
         title: "Gatekeeper & Network",
         type: "Auth",
         severity: "Major",
-        files: ["script.js", "index.html"],
         icon: <Globe size={16} />,
         changes: [
           { tag: "Auth", desc: "Username Gatekeeper", detail: "Secondary login for staff identification." },
@@ -261,7 +246,6 @@ const changelogData = [
         title: "Shared Database Migration",
         type: "Database",
         severity: "Critical",
-        files: ["firestore.rules", "script.js"],
         icon: <Database size={16} />,
         changes: [
           { tag: "Migration", desc: "Global Schema", detail: "Moved to 'shared_event_db' for sync." },
@@ -274,7 +258,6 @@ const changelogData = [
         title: "Dashboard Refinement",
         type: "Fix",
         severity: "Enhancement",
-        files: ["script.js", "style.css"],
         icon: <Layout size={16} />,
         changes: [
           { tag: "Fix", desc: "Loading Bug", detail: "Fixed infinite loading on user list." },
@@ -287,7 +270,6 @@ const changelogData = [
         title: "Security Rules & Heartbeat",
         type: "Security",
         severity: "Major",
-        files: ["firestore.rules"],
         icon: <Lock size={16} />,
         changes: [
           { tag: "Database", desc: "Rule Update", detail: "Allowed Admin to read staff presence." },
@@ -300,7 +282,6 @@ const changelogData = [
         title: "Remote Device Control",
         type: "Security",
         severity: "Critical",
-        files: ["script.js", "index.html"],
         icon: <Server size={16} />,
         changes: [
           { tag: "Security", desc: "Remote Locking", detail: "Admins can lock tabs remotely." },
@@ -313,7 +294,6 @@ const changelogData = [
         title: "Admin Dashboard",
         type: "Feature",
         severity: "Major",
-        files: ["index.html", "script.js"],
         icon: <Users size={16} />,
         changes: [
           { tag: "Feature", desc: "Admin Panel", detail: "Dedicated dashboard for Admins." },
@@ -342,7 +322,6 @@ const changelogData = [
         title: "UX & Data Precision",
         type: "Feature",
         severity: "Enhancement",
-        files: ["script.js", "index.html"],
         icon: <Search size={16} />,
         changes: [
           { tag: "Feature", desc: "Dynamic S.No", detail: "Serial numbers recalculate on filter." },
@@ -355,7 +334,6 @@ const changelogData = [
         title: "Help Tray & Focus Mode",
         type: "UI",
         severity: "Enhancement",
-        files: ["index.html", "style.css"],
         icon: <Layout size={16} />,
         changes: [
           { tag: "UI", desc: "Help Tray", detail: "Added contact tray with Focus Mode." },
@@ -368,7 +346,6 @@ const changelogData = [
         title: "Global Security Enhancements",
         type: "Security",
         severity: "Major",
-        files: ["script.js"],
         icon: <Lock size={16} />,
         changes: [
           { tag: "Security", desc: "Global Password", detail: "Single Admin password for all." },
@@ -381,7 +358,6 @@ const changelogData = [
         title: "Security Architecture",
         type: "Security",
         severity: "Critical",
-        files: ["script.js", "firestore.rules"],
         icon: <ShieldCheck size={16} />,
         changes: [
           { tag: "Security", desc: "Master Password", detail: "Moved password to Firestore." },
@@ -394,7 +370,6 @@ const changelogData = [
         title: "Biometrics & Filters",
         type: "Feature",
         severity: "Major",
-        files: ["script.js", "index.html"],
         icon: <Smartphone size={16} />,
         changes: [
           { tag: "Feature", desc: "Biometrics", detail: "Fingerprint/FaceID Login support." },
@@ -407,7 +382,6 @@ const changelogData = [
         title: "State Persistence",
         type: "Codebase",
         severity: "Enhancement",
-        files: ["script.js", "index.html"],
         icon: <Code size={16} />,
         changes: [
           { tag: "Codebase", desc: "Modularization", detail: "Split into html/css/js modules." },
@@ -436,7 +410,6 @@ const changelogData = [
         title: "Hybrid Sync System",
         type: "Performance",
         severity: "Critical",
-        files: ["script.js"],
         icon: <Activity size={16} />,
         changes: [
           { tag: "Performance", desc: "Hybrid Sync", detail: "Combined onSnapshot with Polling." },
@@ -449,7 +422,6 @@ const changelogData = [
         title: "Sync Reliability Patch",
         type: "Fix",
         severity: "Major",
-        files: ["script.js"],
         icon: <Zap size={16} />,
         changes: [
           { tag: "Codebase", desc: "getDocs Import", detail: "Enable active data pulling." },
@@ -462,7 +434,6 @@ const changelogData = [
         title: "Multi-Device Optimization",
         type: "Performance",
         severity: "Enhancement",
-        files: ["script.js"],
         icon: <Server size={16} />,
         changes: [
           { tag: "Performance", desc: "Debouncing", detail: "250ms delay for burst updates." },
@@ -475,7 +446,6 @@ const changelogData = [
         title: "Animated Feedback",
         type: "UX",
         severity: "Enhancement",
-        files: ["script.js", "style.css"],
         icon: <Activity size={16} />,
         changes: [
           { tag: "Codebase", desc: "Auto-Rotate", detail: "Coupled animation with data fetch." },
@@ -488,7 +458,6 @@ const changelogData = [
         title: "Manual Sync Logic",
         type: "Codebase",
         severity: "Enhancement",
-        files: ["script.js"],
         icon: <Zap size={16} />,
         changes: [
           { tag: "Codebase", desc: "Manual Trigger", detail: "Button click triggers AutoAbsent." },
@@ -501,7 +470,6 @@ const changelogData = [
         title: "The Sync Update",
         type: "UI",
         severity: "Enhancement",
-        files: ["index.html"],
         icon: <Clock size={16} />,
         changes: [
           { tag: "UI", desc: "Refresh Button", detail: "Added circular refresh action." },
@@ -530,7 +498,6 @@ const changelogData = [
         title: "Visuals & Export Expansion",
         type: "UI",
         severity: "Major",
-        files: ["style.css", "script.js"],
         icon: <Layout size={16} />,
         changes: [
           { tag: "UI", desc: "Starry Night", detail: "Dynamic background with parallax." },
@@ -543,7 +510,6 @@ const changelogData = [
         title: "The Cloud Foundation",
         type: "Database",
         severity: "Critical",
-        files: ["script.js"],
         icon: <Database size={16} />,
         changes: [
           { tag: "Database", desc: "Firestore", detail: "Replaced localStorage with Cloud." },
@@ -649,10 +615,6 @@ const SubVersionBlock = ({ sub, isLast }) => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-             <div className="hidden sm:flex items-center gap-2 text-xs text-slate-600 font-mono">
-               <FileCode size={12} />
-               <span>{sub.files.length} files</span>
-             </div>
             <div className="text-slate-600">
               {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             </div>
@@ -661,15 +623,6 @@ const SubVersionBlock = ({ sub, isLast }) => {
         
         {isOpen && (
           <div className="px-4 pb-4 pt-0">
-             {/* Tech Stack / Files */}
-             <div className="mb-4 mt-2 flex flex-wrap gap-2 pl-[3.25rem]">
-                {sub.files.map((f, i) => (
-                  <span key={i} className="text-[10px] font-mono text-slate-500 bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded">
-                    {f}
-                  </span>
-                ))}
-             </div>
-
             <div className="space-y-3 pl-2 sm:pl-[3.25rem] border-t border-slate-800/50 pt-3">
               {sub.changes.map((change, idx) => (
                 <div key={idx} className="group">
@@ -772,7 +725,7 @@ const App = () => {
                </div>
                <div className="flex items-center gap-2">
                  <Cpu size={14} />
-                 <span>React + Firestore</span>
+                 <span>React</span>
                </div>
             </div>
           </div>
