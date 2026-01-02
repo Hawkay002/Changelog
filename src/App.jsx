@@ -9,233 +9,504 @@ import {
 // --- Data Configuration ---
 
 const globalStats = [
-  { label: "Total Builds", value: "42", icon: <GitCommit size={16} />, color: "text-blue-400" },
-  { label: "Major Versions", value: "5", icon: <Hash size={16} />, color: "text-purple-400" },
-  { label: "Files Managed", value: "12", icon: <FileCode size={16} />, color: "text-emerald-400" },
-  { label: "Uptime", value: "99.9%", icon: <Activity size={16} />, color: "text-rose-400" },
+  { label: "Total Builds", value: "34", icon: <GitCommit size={16} />, color: "text-blue-400" },
+  { label: "Major Versions", value: "6", icon: <Hash size={16} />, color: "text-purple-400" },
+  { label: "Files Managed", value: "15", icon: <FileCode size={16} />, color: "text-emerald-400" },
+  { label: "Uptime", value: "100%", icon: <Activity size={16} />, color: "text-rose-400" },
 ];
 
 const changelogData = [
   {
-    majorVersion: "5.0",
-    releaseName: "Data Integrity Architecture",
+    majorVersion: "3.0",
+    releaseName: "Enterprise Tiers & Data Integrity",
     date: "Dec 31, 2025",
     time: "21:36 IST",
-    description: "Complete overhaul of data ingestion pipelines and safety protocols for batch operations.",
+    description: "Final polish introducing tiered ticketing (VIP/Gold), robust data import/export cycles, and persistent session management.",
     stats: [
-      { label: "Import Accuracy", value: "100%", desc: "Regex Parsing" },
-      { label: "Deletion Safety", value: "Atomic", desc: "Iterative Loop" },
-      { label: "Date Formats", value: "4+", desc: "Excel/ISO/Text" }
+      { label: "Tiers", value: "3", desc: "Classic/VIP/Gold" },
+      { label: "Formats", value: "4", desc: "CSV/XLSX/TXT/JSON" },
+      { label: "Safety", value: "100%", desc: "Atomic Deletion" }
     ],
     highlightColor: "text-emerald-400",
     borderColor: "border-emerald-500/20",
     subVersions: [
       {
-        version: "5.1.2",
-        title: "Iterative Deletion Engine",
-        type: "Logic",
-        severity: "Critical",
-        files: ["script.js", "index.html"],
-        icon: <Zap size={16} />,
+        version: "3.3.1",
+        title: "The Final Polish",
+        type: "UX",
+        severity: "Enhancement",
+        files: ["index.html", "script.js"],
+        icon: <CheckCircle2 size={16} />,
         changes: [
-          {
-            tag: "Refactor",
-            desc: "Atomic Loop Implementation",
-            detail: "Replaced Promise.all() with 'for...of' loop to allow interruptible batch operations."
-          },
-          {
-            tag: "Feature",
-            desc: "Safe Stop Mechanism",
-            detail: "Introduced 'stopGuestDelete' flag to halt operations without data corruption."
-          }
+          { tag: "UX", desc: "Deletion Progress Bar", detail: "Added visual progress bar for batch deletions." },
+          { tag: "Logic", desc: "Excel Date Parsing", detail: "Fixed date parsing for Excel serial numbers." }
         ]
       },
       {
-        version: "5.1.0",
-        title: "Advanced File Parsing Core",
+        version: "3.3.0",
+        title: "File Compatibility Core",
         type: "Codebase",
         severity: "Major",
-        files: ["script.js"],
-        icon: <FileText size={16} />,
+        files: ["script.js", "index.html"],
+        icon: <FileCode size={16} />,
         changes: [
-          {
-            tag: "Algorithm",
-            desc: "Regex CSV Parser",
-            detail: "Implemented delimiter auto-detection (comma, pipe, tab) and quoted string handling."
-          },
-          {
-            tag: "Logic",
-            desc: "Excel Serial Date Conversion",
-            detail: "Added math logic to convert Excel dates (e.g., 45657) to JS timestamps."
-          }
+          { tag: "Fix", desc: "MIME Type Support", detail: "Added support for .csv and .txt file picking." },
+          { tag: "Algorithm", desc: "Regex Parser", detail: "Auto-detects delimiters (comma, pipe, tab)." },
+          { tag: "Feature", desc: "Safe Stop", detail: "Added Stop button to halt batch deletions safely." }
+        ]
+      },
+      {
+        version: "3.2.2",
+        title: "Layout & Import Logic",
+        type: "UI",
+        severity: "Enhancement",
+        files: ["index.html", "style.css"],
+        icon: <Layout size={16} />,
+        changes: [
+          { tag: "UI", desc: "Responsive Header", detail: "Flexbox fix for Guest List buttons on mobile." },
+          { tag: "Logic", desc: "Import Status", detail: "Preserves 'Arrived' status during import." },
+          { tag: "UX", desc: "Button Order", detail: "Reordered to [Import] [Delete] [Select]." }
+        ]
+      },
+      {
+        version: "3.2.1",
+        title: "Data Integrity Patch",
+        type: "Fix",
+        severity: "Critical",
+        files: ["script.js"],
+        icon: <Database size={16} />,
+        changes: [
+          { tag: "Logic", desc: "Time Preservation", detail: "Ensured Arrival Time is kept during Export/Import." },
+          { tag: "Fix", desc: "Button Alignment", detail: "Fixed misalignment in Guest List header." }
+        ]
+      },
+      {
+        version: "3.2.0",
+        title: "Persistence & Bulk Tools",
+        type: "Feature",
+        severity: "Major",
+        files: ["script.js", "index.html"],
+        icon: <HardDrive size={16} />,
+        changes: [
+          { tag: "UX", desc: "Persistent Lock", detail: "Lock popup now persists on page refresh." },
+          { tag: "Auth", desc: "Session Restore", detail: "Staff username persists across reloads." },
+          { tag: "Feature", desc: "Bulk Import", detail: "Added CSV/XLSX import with duplicate checks." },
+          { tag: "Logic", desc: "Data Normalization", detail: "Exports show 'VIP' instead of 'Diamond'." }
+        ]
+      },
+      {
+        version: "3.1.0",
+        title: "Tier Refinement",
+        type: "UI",
+        severity: "Enhancement",
+        files: ["style.css", "script.js"],
+        icon: <Code size={16} />,
+        changes: [
+          { tag: "Refactor", desc: "Theme Renaming", detail: "Renamed internal values VIP->Diamond, VVIP->Gold." },
+          { tag: "Database", desc: "Ticket Type Column", detail: "Added 'Type' column to Guest List and Exports." },
+          { tag: "UI", desc: "Header Standardization", detail: "Standardized headers to 'ENTRY PASS - VVIP'." }
+        ]
+      },
+      {
+        version: "3.0.0",
+        title: "Tiers & Notifications",
+        type: "Feature",
+        severity: "Major",
+        files: ["index.html", "style.css"],
+        icon: <Zap size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Ticket Tiers", detail: "Added Classic, VIP (Silver), and VVIP (Gold) themes." },
+          { tag: "UX", desc: "Lock Reasons", detail: "Added Maintenance/Suspension reasons for locks." },
+          { tag: "UI", desc: "Enter Key Support", detail: "Added global Enter key handler for forms." }
         ]
       }
     ]
   },
   {
-    majorVersion: "4.0",
-    releaseName: "Admin & Customization Suite",
+    majorVersion: "2.5",
+    releaseName: "AI Intelligence & Scanner UX",
     date: "Dec 31, 2025",
-    time: "21:25 IST",
-    description: "Introduction of tiered ticketing systems, persistent sessions, and granular security controls.",
+    time: "21:15 IST",
+    description: "Integration of Gemini AI for insights, advanced activity logging, and scanner hardware optimizations.",
     stats: [
-      { label: "Login Latency", value: "0ms", desc: "Cached Auth" },
-      { label: "Ticket Types", value: "3", desc: "Classic/VIP/VVIP" },
-      { label: "Lock Types", value: "3", desc: "Basic/Maint/Ban" }
+      { label: "AI Models", value: "Gemini", desc: "Status Reports" },
+      { label: "Scan Buffer", value: "4s", desc: "Anti-Double" },
+      { label: "Easter Egg", value: "1", desc: "Music Trigger" }
     ],
     highlightColor: "text-indigo-400",
     borderColor: "border-indigo-500/20",
     subVersions: [
       {
-        version: "4.8.0",
-        title: "Session Persistence Layer",
-        type: "Security",
+        version: "2.8.1",
+        title: "Admin UI Cleanup",
+        type: "UI",
         severity: "Enhancement",
-        files: ["script.js", "auth.js"],
-        icon: <ShieldCheck size={16} />,
+        files: ["style.css", "script.js"],
+        icon: <Users size={16} />,
         changes: [
-          {
-            tag: "Cache",
-            desc: "Local Storage Auth",
-            detail: "Cached Gatekeeper credentials to bypass 2FA modal on page refresh."
-          },
-          {
-            tag: "UX",
-            desc: "Forced Lock Awareness",
-            detail: "Popup trigger logic updated to check DB snapshot directly on load."
-          }
+          { tag: "UI", desc: "User Cards", detail: "Simplified cards to show 'Count Active' only." },
+          { tag: "UX", desc: "Online Indicators", detail: "Added Green Dot to user selection chips." },
+          { tag: "Logic", desc: "Auto-Sort", detail: "Online users sorted to top of list." }
         ]
       },
       {
-        version: "4.7.0",
-        title: "Tiered Ticketing System",
-        type: "Feature",
+        version: "2.8.0",
+        title: "Scanner UX Upgrade",
+        type: "Performance",
         severity: "Major",
-        files: ["style.css", "index.html"],
-        icon: <Code size={16} />,
+        files: ["script.js", "style.css"],
+        icon: <Smartphone size={16} />,
         changes: [
-          {
-            tag: "Schema",
-            desc: "Ticket Type Field",
-            detail: "Added 'ticketType' to Firestore schema supporting Diamond & Gold tiers."
-          },
-          {
-            tag: "UI",
-            desc: "Holographic Themes",
-            detail: "Implemented CSS gradients for Metallic Gold and Silver ticket rendering."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    majorVersion: "3.0",
-    releaseName: "Cloud & Security Infrastructure",
-    date: "Dec 31, 2025",
-    time: "21:10 IST",
-    description: "Migration to shared database architecture and real-time remote device management.",
-    stats: [
-      { label: "Sync Scope", value: "Global", desc: "Shared DB" },
-      { label: "Heartbeat", value: "10s", desc: "Presence Check" },
-      { label: "Targeting", value: "User", desc: "Granular Locks" }
-    ],
-    highlightColor: "text-rose-400",
-    borderColor: "border-rose-500/20",
-    subVersions: [
-      {
-        version: "3.5.0",
-        title: "Shared Database Migration",
-        type: "Database",
-        severity: "Critical",
-        files: ["firestore.rules", "script.js"],
-        icon: <Database size={16} />,
-        changes: [
-          {
-            tag: "Migration",
-            desc: "Global Schema",
-            detail: "Moved from user-specific paths to 'shared_event_db' for instant multi-user sync."
-          },
-          {
-            tag: "Security",
-            desc: "Recursive 'Nuke' Logic",
-            detail: "Implemented deep-clean factory reset with auto-credential restoration."
-          }
+          { tag: "Hardware", desc: "Extended Cooldown", detail: "Increased scanner lock to 4s." },
+          { tag: "UI", desc: "Result Animation", detail: "Added 'Hold and Fade' effect for results." },
+          { tag: "Feedback", desc: "Color Coding", detail: "Green (Success), Orange (Dup), Red (Invalid)." }
         ]
       },
       {
-        version: "3.2.0",
-        title: "Remote Command Center",
+        version: "2.7.2",
+        title: "The Easter Egg",
+        type: "UI",
+        severity: "Enhancement",
+        files: ["script.js", "style.css"],
+        icon: <Activity size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Music Trigger", detail: "Added audio trigger to Export Data badge." },
+          { tag: "UI", desc: "Dance Animation", detail: "Added CSS wiggle animation on click." },
+          { tag: "Logic", desc: "State Toggle", detail: "Toggles between Green and Rainbow states." }
+        ]
+      },
+      {
+        version: "2.7.1",
+        title: "Visual Differentiation",
+        type: "UI",
+        severity: "Enhancement",
+        files: ["style.css"],
+        icon: <Layout size={16} />,
+        changes: [
+          { tag: "UI", desc: "Rainbow Badge", detail: "Added gradient badge for EXPORT_DATA." },
+          { tag: "UI", desc: "Wavy Text", detail: "Prepared CSS for wavy text animation." },
+          { tag: "Logic", desc: "Filter Expansion", detail: "Added TICKET_DELETE, FACTORY_RESET to filters." }
+        ]
+      },
+      {
+        version: "2.7.0",
+        title: "AI Integration",
         type: "Feature",
         severity: "Major",
-        files: ["script.js", "admin.html"],
-        icon: <Server size={16} />,
+        files: ["script.js", "index.html"],
+        icon: <Cpu size={16} />,
         changes: [
-          {
-            tag: "Logic",
-            desc: "Presence Heartbeat",
-            detail: "Client-side interval writes timestamp to Firestore every 10s."
-          },
-          {
-            tag: "Access",
-            desc: "Granular Locking",
-            detail: "Updated lock targeting from Email-based to Username-based."
-          }
+          { tag: "Feature", desc: "Gemini AI", detail: "Integrated AI for Status Reports & Drafting." },
+          { tag: "Feature", desc: "Batch Logs", detail: "Added Select & Delete tools for Activity Logs." },
+          { tag: "Codebase", desc: "History Access", detail: "Removed fetch limits for full log history." }
+        ]
+      },
+      {
+        version: "2.6.1",
+        title: "Enhanced Logging",
+        type: "Security",
+        severity: "Major",
+        files: ["script.js", "style.css"],
+        icon: <FileText size={16} />,
+        changes: [
+          { tag: "Data", desc: "Granular Logs", detail: "Logs now record specific usernames." },
+          { tag: "UI", desc: "Danger Badges", detail: "Red styling for Delete/Reset actions." },
+          { tag: "Security", desc: "Settings Lock", detail: "Restricted Event Settings to Admin only." }
         ]
       }
     ]
   },
   {
     majorVersion: "2.0",
-    releaseName: "Performance Core",
+    releaseName: "Command Center Architecture",
     date: "Dec 31, 2025",
-    time: "20:55 IST",
-    description: "Optimization of scanning engine, hybrid synchronization, and UI responsiveness.",
+    time: "21:05 IST",
+    description: "Transformation into a multi-user system with remote device locking, shared database, and activity auditing.",
     stats: [
-      { label: "Scan Buffer", value: "4000ms", desc: "Anti-Double Scan" },
-      { label: "Sync Rate", value: "15s", desc: "Active Polling" },
-      { label: "Debounce", value: "250ms", desc: "UI Optimization" }
+      { label: "Heartbeat", value: "Realtime", desc: "Presence" },
+      { label: "Lock Scope", value: "User", desc: "Granular" },
+      { label: "DB Type", value: "Shared", desc: "Global Sync" }
+    ],
+    highlightColor: "text-rose-400",
+    borderColor: "border-rose-500/20",
+    subVersions: [
+      {
+        version: "2.6.0",
+        title: "Granular Access Control",
+        type: "Security",
+        severity: "Major",
+        files: ["script.js", "firestore.rules"],
+        icon: <ShieldCheck size={16} />,
+        changes: [
+          { tag: "Security", desc: "Username Locking", detail: "Lock specific users sharing an email." },
+          { tag: "Feature", desc: "Activity Logs", detail: "Added audit system for logins/scans." },
+          { tag: "UI", desc: "Log Badges", detail: "Color-coded badges for log types." }
+        ]
+      },
+      {
+        version: "2.5.1",
+        title: "Gatekeeper & Network",
+        type: "Auth",
+        severity: "Major",
+        files: ["script.js", "index.html"],
+        icon: <Globe size={16} />,
+        changes: [
+          { tag: "Auth", desc: "Username Gatekeeper", detail: "Secondary login for staff identification." },
+          { tag: "Network", desc: "Offline Dot", detail: "Red indicator on network loss." },
+          { tag: "Tool", desc: "Bulk Create", detail: "Script for mass staff user creation." }
+        ]
+      },
+      {
+        version: "2.5.0",
+        title: "Shared Database Migration",
+        type: "Database",
+        severity: "Critical",
+        files: ["firestore.rules", "script.js"],
+        icon: <Database size={16} />,
+        changes: [
+          { tag: "Migration", desc: "Global Schema", detail: "Moved to 'shared_event_db' for sync." },
+          { tag: "Security", desc: "Factory Reset", detail: "Added database-backed wipe function." },
+          { tag: "Automation", desc: "Auto-Absent", detail: "Increased sync to 30s for global reliability." }
+        ]
+      },
+      {
+        version: "2.0.3",
+        title: "Dashboard Refinement",
+        type: "Fix",
+        severity: "Enhancement",
+        files: ["script.js", "style.css"],
+        icon: <Layout size={16} />,
+        changes: [
+          { tag: "Fix", desc: "Loading Bug", detail: "Fixed infinite loading on user list." },
+          { tag: "UI", desc: "Email Layout", detail: "Fixed long emails breaking layout." },
+          { tag: "UX", desc: "Password Toggle", detail: "Added eye icon for Admin password." }
+        ]
+      },
+      {
+        version: "2.0.2",
+        title: "Security Rules & Heartbeat",
+        type: "Security",
+        severity: "Major",
+        files: ["firestore.rules"],
+        icon: <Lock size={16} />,
+        changes: [
+          { tag: "Database", desc: "Rule Update", detail: "Allowed Admin to read staff presence." },
+          { tag: "Performance", desc: "Realtime Listeners", detail: "Switched presence to onSnapshot." },
+          { tag: "UX", desc: "Selection Fix", detail: "Fixed lag in Admin selection." }
+        ]
+      },
+      {
+        version: "2.0.1",
+        title: "Remote Device Control",
+        type: "Security",
+        severity: "Critical",
+        files: ["script.js", "index.html"],
+        icon: <Server size={16} />,
+        changes: [
+          { tag: "Security", desc: "Remote Locking", detail: "Admins can lock tabs remotely." },
+          { tag: "Logic", desc: "Lock Listeners", detail: "Devices listen for lock commands." },
+          { tag: "UI", desc: "Lock Banner", detail: "Added 'System Locked' overlay." }
+        ]
+      },
+      {
+        version: "2.0.0",
+        title: "Admin Dashboard",
+        type: "Feature",
+        severity: "Major",
+        files: ["index.html", "script.js"],
+        icon: <Users size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Admin Panel", detail: "Dedicated dashboard for Admins." },
+          { tag: "Logic", desc: "Heartbeat", detail: "Real-time staff presence tracking." },
+          { tag: "UI", desc: "User Roster", detail: "Cards showing device counts/status." }
+        ]
+      }
+    ]
+  },
+  {
+    majorVersion: "1.5",
+    releaseName: "Feature Expansion",
+    date: "Dec 31, 2025",
+    time: "20:50 IST",
+    description: "Introduction of biometrics, advanced filtering, focus modes, and modular code structure.",
+    stats: [
+      { label: "Biometric", value: "WebAuthn", desc: "Fingerprint" },
+      { label: "Modules", value: "ES6", desc: "Structure" },
+      { label: "Filters", value: "Adv", desc: "Gender/Serial" }
     ],
     highlightColor: "text-amber-400",
     borderColor: "border-amber-500/20",
     subVersions: [
       {
-        version: "2.5.0",
-        title: "Scanner Logic Engine",
+        version: "1.7.0",
+        title: "UX & Data Precision",
+        type: "Feature",
+        severity: "Enhancement",
+        files: ["script.js", "index.html"],
+        icon: <Search size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Dynamic S.No", detail: "Serial numbers recalculate on filter." },
+          { tag: "UX", desc: "Selection Mode", detail: "Checkboxes hidden until needed." },
+          { tag: "Data", desc: "Timestamps", detail: "Added exact arrival time display." }
+        ]
+      },
+      {
+        version: "1.6.0",
+        title: "Help Tray & Focus Mode",
+        type: "UI",
+        severity: "Enhancement",
+        files: ["index.html", "style.css"],
+        icon: <Layout size={16} />,
+        changes: [
+          { tag: "UI", desc: "Help Tray", detail: "Added contact tray with Focus Mode." },
+          { tag: "UX", desc: "Focus Blur", detail: "Background blurs when tray is open." },
+          { tag: "UI", desc: "Tooltips", detail: "Standardized tooltip direction." }
+        ]
+      },
+      {
+        version: "1.5.1",
+        title: "Global Security Enhancements",
+        type: "Security",
+        severity: "Major",
+        files: ["script.js"],
+        icon: <Lock size={16} />,
+        changes: [
+          { tag: "Security", desc: "Global Password", detail: "Single Admin password for all." },
+          { tag: "Feature", desc: "Session Timeout", detail: "Auto-lock after 15m inactivity." },
+          { tag: "UI", desc: "View Modal", detail: "Preview tickets without leaving tab." }
+        ]
+      },
+      {
+        version: "1.5.0",
+        title: "Security Architecture",
+        type: "Security",
+        severity: "Critical",
+        files: ["script.js", "firestore.rules"],
+        icon: <ShieldCheck size={16} />,
+        changes: [
+          { tag: "Security", desc: "Master Password", detail: "Moved password to Firestore." },
+          { tag: "Logic", desc: "Device Locking", detail: "LocalStorage based device locking." },
+          { tag: "UX", desc: "Nav Interceptor", detail: "Blocks access to restricted tabs." }
+        ]
+      },
+      {
+        version: "1.4.0",
+        title: "Biometrics & Filters",
+        type: "Feature",
+        severity: "Major",
+        files: ["script.js", "index.html"],
+        icon: <Smartphone size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Biometrics", detail: "Fingerprint/FaceID Login support." },
+          { tag: "Feature", desc: "Gender Filter", detail: "Added Gender filtering/sorting." },
+          { tag: "Hardware", desc: "Continuous Scan", detail: "Added 1.5s buffer for scanning." }
+        ]
+      },
+      {
+        version: "1.3.0",
+        title: "State Persistence",
+        type: "Codebase",
+        severity: "Enhancement",
+        files: ["script.js", "index.html"],
+        icon: <Code size={16} />,
+        changes: [
+          { tag: "Codebase", desc: "Modularization", detail: "Split into html/css/js modules." },
+          { tag: "Logic", desc: "Checkbox Memory", detail: "Selection persists during refresh." },
+          { tag: "UX", desc: "Refresh Spin", detail: "Added custom spin animation." }
+        ]
+      }
+    ]
+  },
+  {
+    majorVersion: "1.2",
+    releaseName: "Real-Time Sync Engine",
+    date: "Dec 31, 2025",
+    time: "20:40 IST",
+    description: "Implementation of hybrid synchronization using active polling and WebSocket listeners.",
+    stats: [
+      { label: "Latency", value: "<250ms", desc: "Debounced" },
+      { label: "Interval", value: "15s", desc: "Active Poll" },
+      { label: "Feedback", value: "Visual", desc: "Spin/Flash" }
+    ],
+    highlightColor: "text-blue-400",
+    borderColor: "border-blue-500/20",
+    subVersions: [
+      {
+        version: "1.2.5",
+        title: "Hybrid Sync System",
         type: "Performance",
+        severity: "Critical",
+        files: ["script.js"],
+        icon: <Activity size={16} />,
+        changes: [
+          { tag: "Performance", desc: "Hybrid Sync", detail: "Combined onSnapshot with Polling." },
+          { tag: "UI", desc: "Sync Badge", detail: "Added 'SYNCING...' indicator." },
+          { tag: "Fix", desc: "Reliability", detail: "Guarantees sync if sockets stall." }
+        ]
+      },
+      {
+        version: "1.2.4",
+        title: "Sync Reliability Patch",
+        type: "Fix",
+        severity: "Major",
+        files: ["script.js"],
+        icon: <Zap size={16} />,
+        changes: [
+          { tag: "Codebase", desc: "getDocs Import", detail: "Enable active data pulling." },
+          { tag: "Logic", desc: "Force Sync", detail: "Wipe and repopulate local list." },
+          { tag: "Refactor", desc: "Timer Logic", detail: "Updated timer to use Force Sync." }
+        ]
+      },
+      {
+        version: "1.2.3",
+        title: "Multi-Device Optimization",
+        type: "Performance",
+        severity: "Enhancement",
+        files: ["script.js"],
+        icon: <Server size={16} />,
+        changes: [
+          { tag: "Performance", desc: "Debouncing", detail: "250ms delay for burst updates." },
+          { tag: "Database", desc: "Conditional Write", detail: "Reduced database costs." },
+          { tag: "UI", desc: "Green Flash", detail: "Highlighted new ticket rows." }
+        ]
+      },
+      {
+        version: "1.2.2",
+        title: "Animated Feedback",
+        type: "UX",
+        severity: "Enhancement",
+        files: ["script.js", "style.css"],
+        icon: <Activity size={16} />,
+        changes: [
+          { tag: "Codebase", desc: "Auto-Rotate", detail: "Coupled animation with data fetch." },
+          { tag: "UX", desc: "Pulse Effect", detail: "Icon spins every 15s automatically." },
+          { tag: "Database", desc: "Deadline Check", detail: "Integrated deadline check in loop." }
+        ]
+      },
+      {
+        version: "1.2.1",
+        title: "Manual Sync Logic",
+        type: "Codebase",
         severity: "Enhancement",
         files: ["script.js"],
         icon: <Zap size={16} />,
         changes: [
-          {
-            tag: "Hardware",
-            desc: "Extended Cooldown",
-            detail: "Increased camera lock-out to 4s to allow result readability."
-          },
-          {
-            tag: "Feedback",
-            desc: "Visual Result States",
-            detail: "Implemented Green/Orange/Red overlays for scan outcomes."
-          }
+          { tag: "Codebase", desc: "Manual Trigger", detail: "Button click triggers AutoAbsent." },
+          { tag: "Feedback", desc: "Instant Update", detail: "Reflects Absent status immediately." },
+          { tag: "UX", desc: "Toast", detail: "Added notification for updates." }
         ]
       },
       {
-        version: "2.1.0",
-        title: "Hybrid Sync Engine",
-        type: "Codebase",
-        severity: "Major",
-        files: ["script.js"],
-        icon: <Activity size={16} />,
+        version: "1.2.0",
+        title: "The Sync Update",
+        type: "UI",
+        severity: "Enhancement",
+        files: ["index.html"],
+        icon: <Clock size={16} />,
         changes: [
-          {
-            tag: "Network",
-            desc: "Active Polling",
-            detail: "Supplemented WebSocket listeners with 15s 'getDocs' polling."
-          },
-          {
-            tag: "Automation",
-            desc: "Auto-Absent Logic",
-            detail: "Server-side check marks 'Absent' if deadline passes during sync."
-          }
+          { tag: "UI", desc: "Refresh Button", detail: "Added circular refresh action." },
+          { tag: "UX", desc: "Spin Animation", detail: "Added fa-spin class." },
+          { tag: "Database", desc: "Interval", detail: "Reduced check to 15s." }
         ]
       }
     ]
@@ -244,34 +515,40 @@ const changelogData = [
     majorVersion: "1.0",
     releaseName: "Foundation",
     date: "Dec 31, 2025",
-    time: "20:30 IST",
-    description: "Initial release, PWA capabilities, and basic Firebase integration.",
+    time: "18:22 IST",
+    description: "Migration to cloud backend, PWA implementation, and the signature 'Midnight Glass' aesthetic.",
     stats: [
-      { label: "Platform", value: "PWA", desc: "Offline Capable" },
-      { label: "Database", value: "NoSQL", desc: "Firestore" },
-      { label: "Sharing", value: "Native", desc: "WhatsApp API" }
+      { label: "Storage", value: "Cloud", desc: "Firestore" },
+      { label: "Theme", value: "Dark", desc: "Midnight Glass" },
+      { label: "Export", value: "PDF/XLS", desc: "SheetJS" }
     ],
-    highlightColor: "text-blue-400",
-    borderColor: "border-blue-500/20",
+    highlightColor: "text-purple-400",
+    borderColor: "border-purple-500/20",
     subVersions: [
       {
-        version: "1.3.0",
-        title: "Offline & PWA",
-        type: "Feature",
-        severity: "Enhancement",
-        files: ["manifest.json", "sw.js"],
-        icon: <Smartphone size={16} />,
+        version: "1.1.0",
+        title: "Visuals & Export Expansion",
+        type: "UI",
+        severity: "Major",
+        files: ["style.css", "script.js"],
+        icon: <Layout size={16} />,
         changes: [
-          {
-            tag: "Config",
-            desc: "App Manifest",
-            detail: "Defined standalone display mode and theme colors."
-          },
-          {
-            tag: "Logic",
-            desc: "Network Monitoring",
-            detail: "Added listeners for navigator.onLine status changes."
-          }
+          { tag: "UI", desc: "Starry Night", detail: "Dynamic background with parallax." },
+          { tag: "Feature", desc: "Adv. Export", detail: "SheetJS/jsPDF integration." },
+          { tag: "Platform", desc: "PWA", detail: "Manifest & Service Worker." }
+        ]
+      },
+      {
+        version: "1.0.0",
+        title: "The Cloud Foundation",
+        type: "Database",
+        severity: "Critical",
+        files: ["script.js"],
+        icon: <Database size={16} />,
+        changes: [
+          { tag: "Database", desc: "Firestore", detail: "Replaced localStorage with Cloud." },
+          { tag: "Auth", desc: "Login System", detail: "Email/Password authentication." },
+          { tag: "Automation", desc: "Auto-Absent", detail: "60s deadline check logic." }
         ]
       }
     ]
@@ -298,6 +575,11 @@ const Badge = ({ type }) => {
     Hardware: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
     Cache: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
     Refactor: "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
+    Platform: "bg-teal-500/10 text-teal-400 border-teal-500/20",
+    Network: "bg-sky-500/10 text-sky-400 border-sky-500/20",
+    Feedback: "bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20",
+    Data: "bg-gray-500/10 text-gray-400 border-gray-500/20",
+    Tool: "bg-violet-500/10 text-violet-400 border-violet-500/20",
   };
 
   const defaultStyle = "bg-slate-800 text-slate-300 border-slate-700";
@@ -330,7 +612,7 @@ const ImpactStat = ({ label, value, desc }) => (
 );
 
 const SubVersionBlock = ({ sub, isLast }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={`relative pl-6 sm:pl-8 ${!isLast ? 'pb-8' : ''}`}>
@@ -486,7 +768,7 @@ const App = () => {
                </div>
                <div className="flex items-center gap-2">
                  <HardDrive size={14} />
-                 <span>v5.1.2</span>
+                 <span>v3.3.1</span>
                </div>
                <div className="flex items-center gap-2">
                  <Cpu size={14} />
