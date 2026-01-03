@@ -3,19 +3,107 @@ import {
   Terminal, ShieldCheck, Database, Layout, Smartphone, Zap, 
   FileText, Code, GitCommit, ChevronDown, ChevronUp, Globe,
   Server, Lock, Search, Users, Activity, Cpu, HardDrive,
-  Clock, Hash, FileCode, AlertCircle, CheckCircle2
+  Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, Bell
 } from 'lucide-react';
 
 // --- Data Configuration ---
 
 const globalStats = [
-  { label: "Total Builds", value: "34", icon: <GitCommit size={16} />, color: "text-blue-400" },
-  { label: "Major Versions", value: "6", icon: <Hash size={16} />, color: "text-purple-400" },
-  { label: "Files Managed", value: "15", icon: <FileCode size={16} />, color: "text-emerald-400" },
+  { label: "Total Builds", value: "40", icon: <GitCommit size={16} />, color: "text-blue-400" },
+  { label: "Major Versions", value: "7", icon: <Hash size={16} />, color: "text-purple-400" },
+  { label: "Files Managed", value: "16", icon: <FileCode size={16} />, color: "text-emerald-400" },
   { label: "Uptime", value: "100%", icon: <Activity size={16} />, color: "text-rose-400" },
 ];
 
 const changelogData = [
+  {
+    majorVersion: "4.0",
+    releaseName: "Command & Communication Center",
+    date: "Jan 03, 2026",
+    time: "08:15 IST",
+    description: "Establishment of a unified internal messaging hub with real-time chat, role-based channels, and advanced notification systems.",
+    stats: [
+      { label: "Channels", value: "3", desc: "Global/Team/Priv" },
+      { label: "Latency", value: "Realtime", desc: "Firestore Listeners" },
+      { label: "Storage", value: "24h TTL", desc: "Auto-Cleanup" }
+    ],
+    highlightColor: "text-cyan-400",
+    borderColor: "border-cyan-500/20",
+    subVersions: [
+      {
+        version: "4.5.0",
+        title: "Final Polish & Fixes",
+        type: "UX",
+        severity: "Enhancement",
+        icon: <CheckCircle2 size={16} />,
+        changes: [
+          { tag: "Fix", desc: "Swipe Sensitivity", detail: "Added >50px threshold to prevent accidental reply triggers." },
+          { tag: "UX", desc: "Quote Navigation", detail: "Clicking a quote scrolls to original message with pulse effect." },
+          { tag: "Refactor", desc: "Audio Assets", detail: "Updated notification sound path to /chime.mp3." }
+        ]
+      },
+      {
+        version: "4.4.0",
+        title: "Channel List Architecture",
+        type: "Feature",
+        severity: "Major",
+        icon: <Layout size={16} />,
+        changes: [
+          { tag: "UI", desc: "Split View Inbox", detail: "Separated Channel List and Active Chat windows." },
+          { tag: "Logic", desc: "Data Bucketing", detail: "Messages sorted in memory to generate inbox previews." },
+          { tag: "Auth", desc: "Admin Directory", detail: "Auto-fetches all usernames for Admin contact book." },
+          { tag: "Security", desc: "Strict Filtering", detail: "Ensures Global/Private cross-talk prevention." }
+        ]
+      },
+      {
+        version: "4.3.0",
+        title: "Advanced Interactions",
+        type: "Feature",
+        severity: "Major",
+        icon: <Smartphone size={16} />,
+        changes: [
+          { tag: "UX", desc: "Swipe-to-Reply", detail: "Touch gestures added for mobile reply quoting." },
+          { tag: "UI", desc: "Context Menu", detail: "Custom Right-click/Long-press menu (Reply/Copy/Edit/Delete)." },
+          { tag: "Database", desc: "Message Editing", detail: "UpdateDoc support with 'isEdited' flag tracking." }
+        ]
+      },
+      {
+        version: "4.2.0",
+        title: "Notification Center",
+        type: "UI",
+        severity: "Enhancement",
+        icon: <Bell size={16} />,
+        changes: [
+          { tag: "UI", desc: "Alert Dropdown", detail: "Bell icon toggles glass-panel dropdown instead of drawer." },
+          { tag: "UX", desc: "State Management", detail: "Separated Chat vs Notification open states." },
+          { tag: "Logic", desc: "Badge Clearing", detail: "Opening dropdown clears red unread count." }
+        ]
+      },
+      {
+        version: "4.1.0",
+        title: "UI Refinements & Grouping",
+        type: "UI",
+        severity: "Enhancement",
+        icon: <Users size={16} />,
+        changes: [
+          { tag: "UI", desc: "Stacked Dropdown", detail: "Added <optgroup> to visually group users by Team." },
+          { tag: "Logic", desc: "Instant Audio", detail: "Detached sound logic from UI state for immediate chime." }
+        ]
+      },
+      {
+        version: "4.0.0",
+        title: "Core Infrastructure",
+        type: "Database",
+        severity: "Critical",
+        icon: <MessageSquare size={16} />,
+        changes: [
+          { tag: "Database", desc: "Communications", detail: "Created Firestore collection with Channel logic." },
+          { tag: "Feature", desc: "Chat Drawer", detail: "Added side-drawer UI with Global/Team/Private routing." },
+          { tag: "Logic", desc: "Auto-Cleanup", detail: "Script deletes messages >24h old on send." }
+        ]
+      }
+    ]
+  },
   {
     majorVersion: "3.0",
     releaseName: "Enterprise Tiers & Data Integrity",
@@ -721,11 +809,11 @@ const App = () => {
                </div>
                <div className="flex items-center gap-2">
                  <HardDrive size={14} />
-                 <span>v3.3.1</span>
+                 <span>v4.5.0</span>
                </div>
                <div className="flex items-center gap-2">
                  <Cpu size={14} />
-                 <span>React</span>
+                 <span>React + Firestore</span>
                </div>
             </div>
           </div>
