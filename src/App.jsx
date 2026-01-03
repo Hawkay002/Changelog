@@ -4,7 +4,7 @@ import {
   FileText, Code, GitCommit, ChevronDown, ChevronUp, Globe,
   Server, Lock, Search, Users, Activity, Cpu, HardDrive,
   Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, 
-  Bell, BookOpen, X, MousePointer2, Volume2, Eye
+  Bell, BookOpen, X, MousePointer2, Volume2, Eye, Reply, Copy, Pencil, Trash2
 } from 'lucide-react';
 
 // --- Data Configuration ---
@@ -26,7 +26,7 @@ const changelogData = [
     stats: [
       { label: "Typing", value: "<2s", desc: "Heartbeat Sync" },
       { label: "Unread", value: "Smart", desc: "Time-based" },
-      { type: "guide_button" } // Special marker for the button
+      { type: "guide_button" }
     ],
     highlightColor: "text-fuchsia-400",
     borderColor: "border-fuchsia-500/20",
@@ -930,8 +930,35 @@ const UserGuideModal = ({ isOpen, onClose }) => {
             <div className="grid md:grid-cols-3 gap-4">
               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
                  <div className="mb-3 text-cyan-400"><MousePointer2 size={20} /></div>
-                 <h5 className="text-sm font-bold text-slate-200 mb-1">Context Menu</h5>
-                 <p className="text-xs text-slate-400">Right-click (Desktop) or Long-press (Mobile) on any message bubble to access advanced options.</p>
+                 <h5 className="text-sm font-bold text-slate-200 mb-2">Context Menu</h5>
+                 <p className="text-xs text-slate-400 mb-4">Right-click or Long-press on any message to access:</p>
+                 
+                 <div className="flex items-center justify-between gap-2">
+                    <div className="flex flex-col items-center gap-1 group">
+                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-colors">
+                          <Reply size={14} className="text-slate-400 group-hover:text-indigo-400" />
+                       </div>
+                       <span className="text-[10px] text-slate-500 font-medium">Reply</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 group">
+                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-colors">
+                          <Copy size={14} className="text-slate-400 group-hover:text-indigo-400" />
+                       </div>
+                       <span className="text-[10px] text-slate-500 font-medium">Copy</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 group">
+                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-colors">
+                          <Pencil size={14} className="text-slate-400 group-hover:text-indigo-400" />
+                       </div>
+                       <span className="text-[10px] text-slate-500 font-medium">Edit</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 group">
+                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-rose-500/50 group-hover:bg-rose-500/10 transition-colors">
+                          <Trash2 size={14} className="text-slate-400 group-hover:text-rose-400" />
+                       </div>
+                       <span className="text-[10px] text-slate-500 font-medium">Delete</span>
+                    </div>
+                 </div>
               </div>
               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
                  <div className="mb-3 text-cyan-400"><MessageSquare size={20} /></div>
