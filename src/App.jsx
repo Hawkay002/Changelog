@@ -26,7 +26,7 @@ const changelogData = [
     stats: [
       { label: "Typing", value: "<2s", desc: "Heartbeat Sync" },
       { label: "Unread", value: "Smart", desc: "Time-based" },
-      { label: "Audio", value: "Conditional", desc: "Context Aware" }
+      { type: "guide_button" } // Special marker for the button
     ],
     highlightColor: "text-fuchsia-400",
     borderColor: "border-fuchsia-500/20",
@@ -773,7 +773,7 @@ const SubVersionBlock = ({ sub, isLast }) => {
   );
 };
 
-const MajorVersionCard = ({ data, isLatest }) => (
+const MajorVersionCard = ({ data, isLatest, onOpenGuide }) => (
   <div className="relative mb-12 sm:mb-20">
     {/* Version Header Card */}
     <div className={`relative z-20 bg-slate-950 border ${isLatest ? 'border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.1)]' : 'border-slate-800'} rounded-2xl p-6 sm:p-8 mb-6 overflow-hidden`}>
@@ -809,7 +809,19 @@ const MajorVersionCard = ({ data, isLatest }) => (
         {/* Right: Stats Grid */}
         <div className="grid grid-cols-3 gap-6 sm:gap-12 lg:border-l lg:border-slate-800 lg:pl-12">
            {data.stats.map((stat, i) => (
-             <ImpactStat key={i} {...stat} />
+             stat.type === 'guide_button' ? (
+                <div key={i} className="flex flex-col justify-center h-full">
+                  <button 
+                     onClick={onOpenGuide}
+                     className="flex flex-col items-center justify-center gap-1.5 w-full h-full bg-indigo-500/10 border border-indigo-500/20 rounded-lg hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all group"
+                  >
+                    <BookOpen size={20} className="text-indigo-400 group-hover:scale-110 transition-transform" />
+                    <span className="text-xs font-bold text-indigo-300">Feature Guide</span>
+                  </button>
+                </div>
+             ) : (
+                <ImpactStat key={i} {...stat} />
+             )
            ))}
         </div>
       </div>
@@ -994,25 +1006,18 @@ const App = () => {
                </div>
             </div>
             
-            <div className="flex items-center gap-4 sm:gap-8">
-               
-               <button 
-                 onClick={() => setIsGuideOpen(true)}
-                 className="hidden sm:flex items-center gap-2 text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1.5 rounded-full hover:bg-indigo-500/20 transition-colors"
-               >
-                 <BookOpen size={14} />
-                 Feature Guide
-               </button>
-
-               <div className="flex items-center gap-6 sm:gap-12 text-xs font-mono text-slate-500">
-                  <div className="flex items-center gap-2">
-                    <Globe size={14} />
-                    <span className="text-emerald-400">Production</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <HardDrive size={14} />
-                    <span>v5.2.0</span>
-                  </div>
+            <div className="flex items-center gap-6 sm:gap-12 text-xs font-mono text-slate-500">
+               <div className="flex items-center gap-2">
+                 <Globe size={14} />
+                 <span className="text-emerald-400">Production</span>
+               </div>
+               <div className="flex items-center gap-2">
+                 <HardDrive size={14} />
+                 <span>v5.2.0</span>
+               </div>
+               <div className="flex items-center gap-2">
+                 <Cpu size={14} />
+                 <span>React + Firestore</span>
                </div>
             </div>
           </div>
@@ -1035,7 +1040,12 @@ const App = () => {
 
           <div className="space-y-4">
             {changelogData.map((version, idx) => (
-              <MajorVersionCard key={idx} data={version} isLatest={idx === 0} />
+              <MajorVersionCard 
+                key={idx} 
+                data={version} 
+                isLatest={idx === 0} 
+                onOpenGuide={() => setIsGuideOpen(true)}
+              />
             ))}
           </div>
         </div>
