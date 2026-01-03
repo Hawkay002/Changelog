@@ -3,19 +3,59 @@ import {
   Terminal, ShieldCheck, Database, Layout, Smartphone, Zap, 
   FileText, Code, GitCommit, ChevronDown, ChevronUp, Globe,
   Server, Lock, Search, Users, Activity, Cpu, HardDrive,
-  Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, Bell
+  Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, 
+  Bell, BookOpen, X, MousePointer2, Volume2, Eye
 } from 'lucide-react';
 
 // --- Data Configuration ---
 
 const globalStats = [
-  { label: "Total Builds", value: "40", icon: <GitCommit size={16} />, color: "text-blue-400" },
-  { label: "Major Versions", value: "7", icon: <Hash size={16} />, color: "text-purple-400" },
+  { label: "Total Builds", value: "45", icon: <GitCommit size={16} />, color: "text-blue-400" },
+  { label: "Major Versions", value: "8", icon: <Hash size={16} />, color: "text-purple-400" },
   { label: "Files Managed", value: "16", icon: <FileCode size={16} />, color: "text-emerald-400" },
   { label: "Uptime", value: "100%", icon: <Activity size={16} />, color: "text-rose-400" },
 ];
 
 const changelogData = [
+  {
+    majorVersion: "5.0",
+    releaseName: "Intelligence & Optimization",
+    date: "Jan 03, 2026",
+    time: "12:40 IST",
+    description: "Refining the communication experience with smart notification logic, real-time typing awareness, and read-receipt hygiene.",
+    stats: [
+      { label: "Typing", value: "<2s", desc: "Heartbeat Sync" },
+      { label: "Unread", value: "Smart", desc: "Time-based" },
+      { label: "Audio", value: "Conditional", desc: "Context Aware" }
+    ],
+    highlightColor: "text-fuchsia-400",
+    borderColor: "border-fuchsia-500/20",
+    subVersions: [
+      {
+        version: "5.2.0",
+        title: "Notification Logic Fixes",
+        type: "Fix",
+        severity: "Major",
+        icon: <Bell size={16} />,
+        changes: [
+          { tag: "Logic", desc: "Intelligent Counting", detail: "Unread count now uses LocalStorage timestamps vs Message timestamps." },
+          { tag: "UX", desc: "Live Read Status", detail: "Active open channels silently update 'Last Read' without badge increment." },
+          { tag: "Fix", desc: "Global Indicator", detail: "Global Broadcasts now respect individual user read history." }
+        ]
+      },
+      {
+        version: "5.1.0",
+        title: "Real-Time Awareness",
+        type: "Feature",
+        severity: "Enhancement",
+        icon: <Activity size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Typing Indicator", detail: "Visual '...' bounce animation powered by temp database heartbeats." },
+          { tag: "Logic", desc: "Smart Chime", detail: "Audio notification suppressed if Chat Drawer is already open." }
+        ]
+      }
+    ]
+  },
   {
     majorVersion: "4.0",
     releaseName: "Command & Communication Center",
@@ -784,10 +824,162 @@ const MajorVersionCard = ({ data, isLatest }) => (
   </div>
 );
 
+const UserGuideModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative z-10 animate-in fade-in zoom-in-95 duration-200">
+        
+        {/* Header */}
+        <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+           <div className="flex items-center gap-3">
+              <div className="bg-indigo-500/10 p-2.5 rounded-lg border border-indigo-500/20 text-indigo-400">
+                <BookOpen size={20} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Comms Center Guide</h3>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Event Ticketing System</p>
+              </div>
+           </div>
+           <button onClick={onClose} className="text-slate-500 hover:text-white hover:bg-slate-800 p-2 rounded-lg transition-colors">
+             <X size={20} />
+           </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-8">
+          
+          {/* Section 1: Interface */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+               <span className="text-emerald-400 font-mono text-sm">01</span>
+               <h4 className="text-lg font-bold text-slate-200">Interface Structure</h4>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
+                  <Layout size={14} /> The Drawer
+                </div>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  The chat lives in a persistent slide-out drawer on the right. You can toggle it anytime without losing your draft or place in the conversation.
+                </p>
+              </div>
+              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                 <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
+                  <Eye size={14} /> Two Views
+                </div>
+                <ul className="text-sm text-slate-400 space-y-1.5 list-disc pl-4">
+                  <li><strong className="text-slate-200">Channel List:</strong> The "Home" view showing all conversations.</li>
+                  <li><strong className="text-slate-200">Active Chat:</strong> The actual messaging window.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 2: Channels */}
+          <section>
+             <div className="flex items-center gap-2 mb-4">
+               <span className="text-emerald-400 font-mono text-sm">02</span>
+               <h4 className="text-lg font-bold text-slate-200">Channel Types</h4>
+            </div>
+             <div className="bg-slate-950/50 rounded-xl border border-slate-800 overflow-hidden divide-y divide-slate-800">
+                <div className="p-4 flex gap-4">
+                   <div className="bg-blue-500/10 p-2 h-fit rounded text-blue-400"><Globe size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Global Broadcast</h5>
+                      <p className="text-xs text-slate-500 mt-1">Visible to everyone. Used for general announcements (e.g., "Gate 2 is crowded").</p>
+                   </div>
+                </div>
+                <div className="p-4 flex gap-4">
+                   <div className="bg-orange-500/10 p-2 h-fit rounded text-orange-400"><Users size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Team Channels</h5>
+                      <p className="text-xs text-slate-500 mt-1">Role-based access. Security sees Security; Reg Desk sees Reg Desk. Admins see all.</p>
+                   </div>
+                </div>
+                <div className="p-4 flex gap-4">
+                   <div className="bg-pink-500/10 p-2 h-fit rounded text-pink-400"><Lock size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Private Channels</h5>
+                      <p className="text-xs text-slate-500 mt-1">Direct Messages (DMs). Admins have a directory of all staff; staff see DMs only after a chat starts.</p>
+                   </div>
+                </div>
+             </div>
+          </section>
+
+          {/* Section 3: Core Features */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+               <span className="text-emerald-400 font-mono text-sm">03</span>
+               <h4 className="text-lg font-bold text-slate-200">Core Interaction</h4>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                 <div className="mb-3 text-cyan-400"><MousePointer2 size={20} /></div>
+                 <h5 className="text-sm font-bold text-slate-200 mb-1">Context Menu</h5>
+                 <p className="text-xs text-slate-400">Right-click (Desktop) or Long-press (Mobile) on any message bubble to access advanced options.</p>
+              </div>
+              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                 <div className="mb-3 text-cyan-400"><MessageSquare size={20} /></div>
+                 <h5 className="text-sm font-bold text-slate-200 mb-1">Reply & Edit</h5>
+                 <p className="text-xs text-slate-400">Reply to specific messages to create context quotes. Edit your own messages to fix typos in real-time.</p>
+              </div>
+              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                 <div className="mb-3 text-cyan-400"><Activity size={20} /></div>
+                 <h5 className="text-sm font-bold text-slate-200 mb-1">Typing Indicators</h5>
+                 <p className="text-xs text-slate-400">See when others are typing via the "..." animation. Powered by a heartbeat system (updates every 2s).</p>
+              </div>
+            </div>
+          </section>
+
+           {/* Section 4: Notifications */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+               <span className="text-emerald-400 font-mono text-sm">04</span>
+               <h4 className="text-lg font-bold text-slate-200">Notification System</h4>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+               <div className="flex-1 bg-gradient-to-br from-slate-900 to-slate-950 p-4 rounded-xl border border-slate-800 flex gap-4 items-center">
+                  <div className="bg-red-500/20 text-red-500 p-3 rounded-full"><Bell size={20} /></div>
+                  <div>
+                    <h5 className="text-sm font-bold text-white">Smart Badge</h5>
+                    <p className="text-xs text-slate-400">Red counter shows unread messages across all channels.</p>
+                  </div>
+               </div>
+               <div className="flex-1 bg-gradient-to-br from-slate-900 to-slate-950 p-4 rounded-xl border border-slate-800 flex gap-4 items-center">
+                  <div className="bg-purple-500/20 text-purple-500 p-3 rounded-full"><Volume2 size={20} /></div>
+                  <div>
+                    <h5 className="text-sm font-bold text-white">Adaptive Chime</h5>
+                    <p className="text-xs text-slate-400">Subtle sound plays only if the chat drawer is closed.</p>
+                  </div>
+               </div>
+            </div>
+          </section>
+
+        </div>
+        
+        {/* Footer Actions */}
+        <div className="p-4 border-t border-slate-800 bg-slate-950 flex justify-end">
+           <button onClick={onClose} className="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-semibold transition-colors">
+             Got it
+           </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#050505] text-slate-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
       
+      {/* User Guide Modal */}
+      <UserGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
+
       {/* Header / Global Stats */}
       <div className="border-b border-slate-900 bg-[#050505]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
@@ -802,18 +994,25 @@ const App = () => {
                </div>
             </div>
             
-            <div className="flex items-center gap-6 sm:gap-12 text-xs font-mono text-slate-500">
-               <div className="flex items-center gap-2">
-                 <Globe size={14} />
-                 <span className="text-emerald-400">Production</span>
-               </div>
-               <div className="flex items-center gap-2">
-                 <HardDrive size={14} />
-                 <span>v4.5.0</span>
-               </div>
-               <div className="flex items-center gap-2">
-                 <Cpu size={14} />
-                 <span>React + Firestore</span>
+            <div className="flex items-center gap-4 sm:gap-8">
+               
+               <button 
+                 onClick={() => setIsGuideOpen(true)}
+                 className="hidden sm:flex items-center gap-2 text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1.5 rounded-full hover:bg-indigo-500/20 transition-colors"
+               >
+                 <BookOpen size={14} />
+                 Feature Guide
+               </button>
+
+               <div className="flex items-center gap-6 sm:gap-12 text-xs font-mono text-slate-500">
+                  <div className="flex items-center gap-2">
+                    <Globe size={14} />
+                    <span className="text-emerald-400">Production</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <HardDrive size={14} />
+                    <span>v5.2.0</span>
+                  </div>
                </div>
             </div>
           </div>
