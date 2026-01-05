@@ -283,6 +283,18 @@ const changelogData = [
           { tag: "Database", desc: "Ticket Type Column", detail: "Added 'Type' column to Guest List and Exports." },
           { tag: "UI", desc: "Header Standardization", detail: "Standardized headers to 'ENTRY PASS - VVIP'." }
         ]
+      },
+      {
+        version: "3.0.0",
+        title: "Tiers & Notifications",
+        type: "Feature",
+        severity: "Major",
+        icon: <Zap size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Ticket Tiers", detail: "Added Classic, VIP (Silver), and VVIP (Gold) themes." },
+          { tag: "UX", desc: "Lock Reasons", detail: "Added Maintenance/Suspension reasons for locks." },
+          { tag: "UI", desc: "Enter Key Support", detail: "Added global Enter key handler for forms." }
+        ]
       }
     ]
   },
@@ -918,7 +930,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                   <Database size={14} /> Single-Stream Model
                 </div>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Unlike apps that open connections per user, the system maintains <strong>one single WebSocket connection</strong> to Firestore. It fetches the most recent 300 messages in one pipe and filters them locally, saving battery and bandwidth.
+                  Unlike apps that open connections per user, the system maintains <strong>one single WebSocket connection</strong> (<code>setupChatListener</code>) to Firestore. It fetches the most recent 300 messages in one pipe and filters them locally using <code>processAllMessages()</code>, saving battery and bandwidth.
                 </p>
               </div>
               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
@@ -926,7 +938,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                   <Cpu size={14} /> Local Data Bucket
                 </div>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  The "RAM" of the chat. Every database update overwrites a local array. A processor function immediately runs to sort these raw messages into <strong>Global</strong>, <strong>Team</strong>, and <strong>Private</strong> buckets on the fly.
+                  The "RAM" of the chat is the <code>allMessages</code> array. Every database update overwrites this array. The processor function then immediately sorts these raw messages into <strong>Global</strong>, <strong>Team</strong>, and <strong>Private</strong> buckets on the fly based on <code>channelType</code>.
                 </p>
               </div>
             </div>
@@ -943,7 +955,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                    <div className="bg-blue-500/10 p-2 h-fit rounded text-blue-400"><Globe size={16} /></div>
                    <div>
                       <h5 className="text-sm font-bold text-slate-200">Global & Team</h5>
-                      <p className="text-xs text-slate-500 mt-1">Global messages are broadcast to a single key. Team messages use email-based filtering, ensuring staff only see their specific department while Admins see all.</p>
+                      <p className="text-xs text-slate-500 mt-1">Global messages map to key <code>GLOBAL_ALL</code>. Team messages use <code>TEAM_targetEmail</code>. Staff only see teams matching their email, while Admins see all.</p>
                    </div>
                 </div>
                 <div className="p-4 flex gap-4">
@@ -951,7 +963,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                    <div>
                       <h5 className="text-sm font-bold text-slate-200">Smart Private View</h5>
                       <p className="text-xs text-slate-500 mt-1">
-                        Solves the "Sender/Receiver" dilemma. The logic groups messages by the *other* person. If Admin looks, it groups by "John"; if John looks, it groups by "Admin", creating a seamless thread.
+                        Solves the "Sender/Receiver" dilemma. The logic groups messages by the *other* person. If Admin looks, it groups by "John"; if John looks, it groups by "Admin", creating a seamless thread key <code>PRIVATE_username</code>.
                       </p>
                    </div>
                 </div>
@@ -969,14 +981,14 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                    <div className="flex-1">
                       <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Bell size={14} className="text-red-400"/> Unread Counters</h5>
                       <p className="text-xs text-slate-400 leading-relaxed">
-                         The app compares message timestamps against a stored <code>lastRead</code> timestamp in your browser. If a message is newer than your last visit, it increments the badge and plays a chime.
+                         The app compares message timestamps against a stored <code>lastRead_CHANNEL_KEY</code> timestamp in <code>localStorage</code>. If <code>msg.timestamp &gt; lastRead</code>, it increments the badge and plays a chime.
                       </p>
                    </div>
                    <div className="w-px bg-slate-800 hidden sm:block"></div>
                    <div className="flex-1">
                       <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Eraser size={14} className="text-purple-400"/> The "Clear All" Trick</h5>
                       <p className="text-xs text-slate-400 leading-relaxed">
-                         Clearing notifications doesn't delete messages. It saves a "Clear Timestamp". The dropdown filter simply hides any notification older than this timestamp, keeping your history safe but your list clean.
+                         Clearing notifications doesn't delete messages. It saves a <code>notifs_cleared_timestamp</code>. The dropdown filter simply hides any notification older than this timestamp, keeping history safe.
                       </p>
                    </div>
                 </div>
@@ -993,17 +1005,23 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
                   <div className="mb-2 text-fuchsia-400"><CheckSquare size={18} /></div>
                   <h5 className="text-sm font-bold text-slate-200 mb-1">Smart Selection</h5>
-                  <p className="text-xs text-slate-400">The selection menu is aware of ownership. If you select a message you didn't send, the "Delete" button physically vanishes from the UI to prevent errors.</p>
+                  <p className="text-xs text-slate-400">
+                    <code>updateSelectionMenu()</code> checks ownership. If you select a message you didn't send (<code>senderEmail !== currentUser.email</code>), the Delete button is hidden via <code>display: none</code>.
+                  </p>
                </div>
                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
                   <div className="mb-2 text-cyan-400"><Activity size={18} /></div>
                   <h5 className="text-sm font-bold text-slate-200 mb-1">Live Presence</h5>
-                  <p className="text-xs text-slate-400">Typing indicators use a throttled heartbeat (2s limit). The receiver only shows the animation if the timestamp is "fresh" (&lt;3s old).</p>
+                  <p className="text-xs text-slate-400">
+                    Typing indicators write to <code>typing_status</code> collection. Sender logic is throttled (2s). Receiver logic only shows animation if timestamp is "fresh" (&lt;3s).
+                  </p>
                </div>
                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
                   <div className="mb-2 text-emerald-400"><Trash2 size={18} /></div>
                   <h5 className="text-sm font-bold text-slate-200 mb-1">Auto-Cleanup</h5>
-                  <p className="text-xs text-slate-400">To keep the free-tier database fast, a "Janitor" routine runs on Admin messages, wiping data older than 36 hours automatically.</p>
+                  <p className="text-xs text-slate-400">
+                    <code>cleanUpOldMessages()</code> runs on Admin message send. It queries for <code>timestamp &lt; (now - 36h)</code> and executes a batch delete to maintain DB health.
+                  </p>
                </div>
             </div>
           </section>
@@ -1104,4 +1122,3 @@ const App = () => {
 };
 
 export default App;
-
