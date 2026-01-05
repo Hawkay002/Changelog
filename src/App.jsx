@@ -5,7 +5,7 @@ import {
   Server, Lock, Search, Users, Activity, Cpu, HardDrive,
   Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, 
   Bell, BookOpen, X, MousePointer2, Volume2, Eye, Reply, Copy, Pencil, Trash2,
-  Layers, CheckSquare, Eraser, Calendar, Network, Fingerprint, EyeOff
+  Layers, CheckSquare, Eraser, Calendar, Filter
 } from 'lucide-react';
 
 // --- Data Configuration ---
@@ -65,8 +65,8 @@ const changelogData = [
         icon: <ShieldCheck size={16} />,
         changes: [
           { tag: "Security", desc: "Strict Delete Rules", detail: "Server-side check: Sender must match Auth Token." },
-          { tag: "Performance", desc: "Fetch Optimization", detail: "Increased history limit to 300 messages." },
-          { tag: "Logic", desc: "Data Retention", detail: "Auto-cleanup extended to 36 hours." },
+          { tag: "Performance", desc: "Fetch Optimization", detail: "Increased history limit to 300 messages for deeper context." },
+          { tag: "Logic", desc: "Data Retention", detail: "Auto-cleanup extended to 36 hours for admin broadcasts." },
           { tag: "UI", desc: "Date Separators", detail: "Injected 'Today/Yesterday' pills between message groups." }
         ]
       }
@@ -859,7 +859,7 @@ const MajorVersionCard = ({ data, isLatest, onOpenGuide }) => (
                      className="flex flex-col items-center justify-center gap-1.5 w-full h-full bg-indigo-500/10 border border-indigo-500/20 rounded-lg hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all group"
                   >
                     <BookOpen size={20} className="text-indigo-400 group-hover:scale-110 transition-transform" />
-                    <span className="text-xs font-bold text-indigo-300">System Reference</span>
+                    <span className="text-xs font-bold text-indigo-300">Feature Guide</span>
                   </button>
                 </div>
              ) : (
@@ -894,8 +894,8 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                 <BookOpen size={20} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Comms Center System Reference</h3>
-                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Technical Manual & Interaction Guide</p>
+                <h3 className="text-xl font-bold text-white">Comms Center: Under the Hood</h3>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Technical Manual</p>
               </div>
            </div>
            <button onClick={onClose} className="text-slate-500 hover:text-white hover:bg-slate-800 p-2 rounded-lg transition-colors">
@@ -910,51 +910,49 @@ const UserGuideModal = ({ isOpen, onClose }) => {
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">01</span>
-               <h4 className="text-lg font-bold text-slate-200">System Architecture</h4>
+               <h4 className="text-lg font-bold text-slate-200">Core Architecture (The Brain)</h4>
             </div>
-            <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800 grid md:grid-cols-2 gap-4">
-                <div>
-                  <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
-                    <Database size={14} /> Data Pipeline
-                  </div>
-                  <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
-                    <li><strong>Single-Socket Listener:</strong> Maintains one efficient real-time connection for all channel types (Global/Team/Private) to minimize bandwidth.</li>
-                    <li><strong>Client-Side Bucketing:</strong> Ingests raw message stream and filters into virtual channels in memory based on RBAC protocols.</li>
-                  </ul>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
+                  <Database size={14} /> Single-Stream Model
                 </div>
-                <div>
-                   <div className="flex items-center gap-2 text-rose-400 mb-2 font-bold text-sm uppercase">
-                    <Eraser size={14} /> Lifecycle Management
-                  </div>
-                   <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
-                    <li><strong>Garbage Collection:</strong> Admin-triggered routine identifies and purges messages older than 36 hours (TTL) to maintain query performance.</li>
-                    <li><strong>Fetch Optimization:</strong> Limits query depth to recent 300 items to ensure sub-100ms load times.</li>
-                  </ul>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Unlike apps that open connections per user, the system maintains <strong>one single WebSocket connection</strong> to Firestore. It fetches the most recent 300 messages in one pipe and filters them locally, saving battery and bandwidth.
+                </p>
+              </div>
+              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                 <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
+                  <Cpu size={14} /> Local Data Bucket
                 </div>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  The "RAM" of the chat. Every database update overwrites a local array. A processor function immediately runs to sort these raw messages into <strong>Global</strong>, <strong>Team</strong>, and <strong>Private</strong> buckets on the fly.
+                </p>
+              </div>
             </div>
           </section>
 
-          {/* Section 2: Security */}
+          {/* Section 2: Routing */}
           <section>
              <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">02</span>
-               <h4 className="text-lg font-bold text-slate-200">Security & Integrity</h4>
+               <h4 className="text-lg font-bold text-slate-200">Channel Routing Logic</h4>
             </div>
-             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
-                  <ShieldCheck size={14} /> Dual-Layer Deletion Guard
-                </div>
-                <p className="text-sm text-slate-400 mb-3 leading-relaxed">
-                  Prevention of unauthorized data removal through a two-step verification process:
-                </p>
-                <div className="grid md:grid-cols-2 gap-4">
-                   <div className="bg-slate-900 border border-slate-800 p-3 rounded-lg">
-                      <h5 className="text-xs font-bold text-slate-300 mb-1">Layer 1: UI Heuristics</h5>
-                      <p className="text-xs text-slate-500">Selection logic automatically hides deletion controls if any selected item belongs to another user.</p>
+             <div className="bg-slate-950/50 rounded-xl border border-slate-800 overflow-hidden divide-y divide-slate-800">
+                <div className="p-4 flex gap-4">
+                   <div className="bg-blue-500/10 p-2 h-fit rounded text-blue-400"><Globe size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Global & Team</h5>
+                      <p className="text-xs text-slate-500 mt-1">Global messages are broadcast to a single key. Team messages use email-based filtering, ensuring staff only see their specific department while Admins see all.</p>
                    </div>
-                   <div className="bg-slate-900 border border-slate-800 p-3 rounded-lg">
-                      <h5 className="text-xs font-bold text-slate-300 mb-1">Layer 2: Server Authority</h5>
-                      <p className="text-xs text-slate-500">Database security rules reject any write/delete operation where the auth token does not match the resource owner.</p>
+                </div>
+                <div className="p-4 flex gap-4">
+                   <div className="bg-pink-500/10 p-2 h-fit rounded text-pink-400"><Lock size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Smart Private View</h5>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Solves the "Sender/Receiver" dilemma. The logic groups messages by the *other* person. If Admin looks, it groups by "John"; if John looks, it groups by "Admin", creating a seamless thread.
+                      </p>
                    </div>
                 </div>
              </div>
@@ -964,65 +962,49 @@ const UserGuideModal = ({ isOpen, onClose }) => {
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">03</span>
-               <h4 className="text-lg font-bold text-slate-200">Notification State Machine</h4>
+               <h4 className="text-lg font-bold text-slate-200">Notification System (Local Masking)</h4>
             </div>
-             <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                   <div className="mb-2 text-fuchsia-400"><EyeOff size={18} /></div>
-                   <h5 className="text-sm font-bold text-slate-200">Local Masking</h5>
-                   <p className="text-xs text-slate-400 mt-1">Clearing notifications uses a local timestamp filter. It hides alerts without deleting the underlying chat history from the server.</p>
-                </div>
-                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                   <div className="mb-2 text-cyan-400"><CheckSquare size={18} /></div>
-                   <h5 className="text-sm font-bold text-slate-200">Read State</h5>
-                   <p className="text-xs text-slate-400 mt-1">Dynamic comparison of <code>MessageTime</code> vs <code>LastOpenedTime</code> determines the visual "Unread" (Blue) or "Read" (Grey) status.</p>
-                </div>
-                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                   <div className="mb-2 text-emerald-400"><Volume2 size={18} /></div>
-                   <h5 className="text-sm font-bold text-slate-200">Context Audio</h5>
-                   <p className="text-xs text-slate-400 mt-1">Audio feedback engine checks interface state (Drawer Open/Closed) before triggering chimes to prevent redundant noise.</p>
+             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                <div className="flex flex-col sm:flex-row gap-6">
+                   <div className="flex-1">
+                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Bell size={14} className="text-red-400"/> Unread Counters</h5>
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                         The app compares message timestamps against a stored <code>lastRead</code> timestamp in your browser. If a message is newer than your last visit, it increments the badge and plays a chime.
+                      </p>
+                   </div>
+                   <div className="w-px bg-slate-800 hidden sm:block"></div>
+                   <div className="flex-1">
+                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Eraser size={14} className="text-purple-400"/> The "Clear All" Trick</h5>
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                         Clearing notifications doesn't delete messages. It saves a "Clear Timestamp". The dropdown filter simply hides any notification older than this timestamp, keeping your history safe but your list clean.
+                      </p>
+                   </div>
                 </div>
              </div>
           </section>
 
-           {/* Section 4: Interaction Engine */}
+           {/* Section 4: Interaction */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">04</span>
-               <h4 className="text-lg font-bold text-slate-200">Interaction Engine</h4>
+               <h4 className="text-lg font-bold text-slate-200">Interactive Features</h4>
             </div>
-            <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800 mb-4">
-               <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
-                  <MousePointer2 size={14} /> Adaptive Input Methods
+            <div className="grid md:grid-cols-3 gap-4">
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-fuchsia-400"><CheckSquare size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200 mb-1">Smart Selection</h5>
+                  <p className="text-xs text-slate-400">The selection menu is aware of ownership. If you select a message you didn't send, the "Delete" button physically vanishes from the UI to prevent errors.</p>
                </div>
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  <div className="p-2 bg-slate-900 rounded border border-slate-800 text-center">
-                     <div className="text-xs font-bold text-slate-300">Context Menu</div>
-                     <div className="text-[10px] text-slate-500">Right Click / Long Press</div>
-                  </div>
-                   <div className="p-2 bg-slate-900 rounded border border-slate-800 text-center">
-                     <div className="text-xs font-bold text-slate-300">Multi-Select</div>
-                     <div className="text-[10px] text-slate-500">0.6s Hold Duration</div>
-                  </div>
-                   <div className="p-2 bg-slate-900 rounded border border-slate-800 text-center">
-                     <div className="text-xs font-bold text-slate-300">Batch Actions</div>
-                     <div className="text-[10px] text-slate-500">Aggregate Copy / Delete</div>
-                  </div>
-                   <div className="p-2 bg-slate-900 rounded border border-slate-800 text-center">
-                     <div className="text-xs font-bold text-slate-300">Reply Context</div>
-                     <div className="text-[10px] text-slate-500">Swipe Gesture (Touch)</div>
-                  </div>
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-cyan-400"><Activity size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200 mb-1">Live Presence</h5>
+                  <p className="text-xs text-slate-400">Typing indicators use a throttled heartbeat (2s limit). The receiver only shows the animation if the timestamp is "fresh" (&lt;3s old).</p>
                </div>
-            </div>
-             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                 <div className="flex items-center justify-between gap-2 mb-2">
-                    <div className="flex items-center gap-2 text-orange-400 font-bold text-sm uppercase">
-                        <Activity size={14} /> Real-Time Presence
-                    </div>
-                 </div>
-                 <p className="text-xs text-slate-400">
-                    Utilizes ephemeral "Heartbeat" records in a separate collection. Client throttles updates to 2000ms intervals to maintain a live "Typing..." state without database write exhaustion.
-                 </p>
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-emerald-400"><Trash2 size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200 mb-1">Auto-Cleanup</h5>
+                  <p className="text-xs text-slate-400">To keep the free-tier database fast, a "Janitor" routine runs on Admin messages, wiping data older than 36 hours automatically.</p>
+               </div>
             </div>
           </section>
 
@@ -1031,7 +1013,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
         {/* Footer Actions */}
         <div className="p-4 border-t border-slate-800 bg-slate-950 flex justify-end">
            <button onClick={onClose} className="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-semibold transition-colors">
-             Close Reference
+             Close Manual
            </button>
         </div>
       </div>
