@@ -5,7 +5,7 @@ import {
   Server, Lock, Search, Users, Activity, Cpu, HardDrive,
   Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, 
   Bell, BookOpen, X, MousePointer2, Volume2, Eye, Reply, Copy, Pencil, Trash2,
-  Layers, CheckSquare, Eraser, Calendar, Filter
+  Layers, CheckSquare, Eraser, Calendar, Filter, Send, Menu
 } from 'lucide-react';
 
 // --- Data Configuration ---
@@ -906,8 +906,8 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                 <BookOpen size={20} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Comms Center</h3>
-                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">User & Feature Guide</p>
+                <h3 className="text-xl font-bold text-white">Comms Center User Manual</h3>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Everything you need to know</p>
               </div>
            </div>
            <button onClick={onClose} className="text-slate-500 hover:text-white hover:bg-slate-800 p-2 rounded-lg transition-colors">
@@ -918,110 +918,166 @@ const UserGuideModal = ({ isOpen, onClose }) => {
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           
-          {/* Feature Highlight: Multi-Select */}
+          {/* Section 1: Getting Started */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">01</span>
-               <h4 className="text-lg font-bold text-slate-200">Messaging: Multi-Select & Batch Actions</h4>
+               <h4 className="text-lg font-bold text-slate-200">Getting Started</h4>
             </div>
             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                <div className="flex gap-4">
-                    <div className="bg-indigo-500/10 p-3 h-fit rounded-lg text-indigo-400">
-                        <CheckSquare size={24} />
-                    </div>
-                    <div>
-                        <h5 className="text-sm font-bold text-slate-200 mb-2">Long Press to Select</h5>
-                        <p className="text-sm text-slate-400 leading-relaxed mb-4">
-                            Just like your favorite messaging apps, you can now manage multiple messages at once. <strong>Long press (0.6s)</strong> on any message bubble to enter selection mode. Tap other messages to add them to your selection.
-                        </p>
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-slate-900 border border-slate-800 p-3 rounded flex items-center gap-3">
-                                <Copy size={16} className="text-cyan-400" />
-                                <div>
-                                    <div className="text-xs font-bold text-slate-300">Batch Copy</div>
-                                    <div className="text-[10px] text-slate-500">Copies all selected texts to clipboard.</div>
-                                </div>
-                            </div>
-                            <div className="bg-slate-900 border border-slate-800 p-3 rounded flex items-center gap-3">
-                                <Trash2 size={16} className="text-rose-400" />
-                                <div>
-                                    <div className="text-xs font-bold text-slate-300">Batch Delete</div>
-                                    <div className="text-[10px] text-slate-500">Instantly removes selected messages.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="flex flex-col sm:flex-row gap-6">
+                   <div className="flex-1">
+                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Layout size={14} className="text-indigo-400"/> Finding the Chat</h5>
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                         Look for the <strong>Chat Bubble Icon</strong> in the top-right header. Clicking this opens the <strong>Comms Drawer</strong>, a persistent side panel where all your conversations live.
+                      </p>
+                   </div>
+                   <div className="w-px bg-slate-800 hidden sm:block"></div>
+                   <div className="flex-1">
+                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Menu size={14} className="text-indigo-400"/> Navigation</h5>
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                         Use the <strong>Back Arrow (←)</strong> at the top of the chat window to return to the main "Inbox" list. This is where you can switch between Global, Team, and Private chats.
+                      </p>
+                   </div>
                 </div>
             </div>
           </section>
 
-          {/* Feature Highlight: Smart Notifications */}
+          {/* Section 2: Channels */}
           <section>
              <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">02</span>
-               <h4 className="text-lg font-bold text-slate-200">Smart Notifications</h4>
+               <h4 className="text-lg font-bold text-slate-200">Channels & Privacy</h4>
             </div>
-             <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                   <div className="mb-3 text-cyan-400"><Bell size={20} /></div>
-                   <h5 className="text-sm font-bold text-slate-200 mb-1">Dynamic Read Status</h5>
-                   <p className="text-xs text-slate-400 leading-relaxed">
-                      Notifications now intelligently turn from <strong>Blue (Unread)</strong> to <strong>Grey (Read)</strong>. The system tracks when you last opened a chat and only highlights truly new messages.
-                   </p>
+             <div className="bg-slate-950/50 rounded-xl border border-slate-800 overflow-hidden divide-y divide-slate-800">
+                <div className="p-4 flex gap-4">
+                   <div className="bg-blue-500/10 p-2 h-fit rounded text-blue-400"><Globe size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Global Broadcast</h5>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Use this for announcements visible to <strong>everyone</strong> (Admin + All Staff). Good for "Lunch is ready" or "Event Started".
+                      </p>
+                   </div>
                 </div>
-                 <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                   <div className="mb-3 text-emerald-400"><Eraser size={20} /></div>
-                   <h5 className="text-sm font-bold text-slate-200 mb-1">Bulk Clear</h5>
-                   <p className="text-xs text-slate-400 leading-relaxed">
-                      Overwhelmed? Use the <strong>"Clear All"</strong> button in the notification dropdown to instantly wipe your alert history without deleting the actual chat conversations.
-                   </p>
+                <div className="p-4 flex gap-4">
+                   <div className="bg-orange-500/10 p-2 h-fit rounded text-orange-400"><Users size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Team Channels</h5>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Security talks to Security. Registration talks to Registration. As an <strong>Admin</strong>, you see all team channels. As <strong>Staff</strong>, you only see your own team.
+                      </p>
+                   </div>
+                </div>
+                <div className="p-4 flex gap-4">
+                   <div className="bg-pink-500/10 p-2 h-fit rounded text-pink-400"><Lock size={16} /></div>
+                   <div>
+                      <h5 className="text-sm font-bold text-slate-200">Private Chats</h5>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Direct 1-on-1 messages. Admins have a full directory of staff to start chats. Staff see private chats only after a conversation has begun.
+                      </p>
+                   </div>
                 </div>
              </div>
           </section>
 
-          {/* Feature Highlight: Typing Indicators */}
+          {/* Section 3: Messaging */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">03</span>
-               <h4 className="text-lg font-bold text-slate-200">Real-Time Presence</h4>
+               <h4 className="text-lg font-bold text-slate-200">Sending & Receiving</h4>
             </div>
-             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800 flex gap-4 items-center">
-                <div className="bg-fuchsia-500/10 p-3 h-fit rounded-lg text-fuchsia-400"><Activity size={24} /></div>
-                <div>
-                   <h5 className="text-sm font-bold text-slate-200">Typing Indicators</h5>
-                   <p className="text-sm text-slate-400 mt-1 leading-relaxed">
-                     See exactly when someone is replying. A sleek <strong>"..." animation</strong> appears in real-time above the chat input when another user is typing in your current channel.
-                   </p>
-                </div>
-             </div>
+            <div className="grid md:grid-cols-2 gap-4">
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Send size={14} className="text-cyan-400"/> Sending</h5>
+                  <p className="text-xs text-slate-400 leading-relaxed mb-3">
+                     Type in the box at the bottom and hit <strong>Enter</strong> or the <strong>Paper Plane</strong> icon.
+                  </p>
+                  <div className="flex flex-col gap-2 p-2 bg-slate-900 rounded border border-slate-800">
+                     <div className="self-end bg-blue-600/20 text-blue-200 text-[10px] px-2 py-1 rounded-lg rounded-br-none w-fit">Your Message</div>
+                     <div className="self-start bg-slate-800 text-slate-300 text-[10px] px-2 py-1 rounded-lg rounded-bl-none w-fit">Their Reply</div>
+                  </div>
+               </div>
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Activity size={14} className="text-fuchsia-400"/> Real-Time Cues</h5>
+                  <ul className="text-xs text-slate-400 space-y-2 list-disc pl-4">
+                     <li><strong>Typing Indicators:</strong> A "..." animation appears when someone is replying.</li>
+                     <li><strong>Time Separators:</strong> Messages are grouped by "Today" and "Yesterday" so you know when things happened.</li>
+                  </ul>
+               </div>
+            </div>
           </section>
 
-           {/* Core: Architecture (Brief) */}
+           {/* Section 4: Actions (Context Menu) */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">04</span>
-               <h4 className="text-lg font-bold text-slate-200">Core Architecture</h4>
+               <h4 className="text-lg font-bold text-slate-200">Actions & Editing</h4>
             </div>
             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-400">
-                   <li className="flex items-start gap-2">
-                       <Database size={14} className="mt-1 text-indigo-400" />
-                       <span><strong>Single-Stream:</strong> One efficient connection handles Global, Team, and Private chats to save battery.</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                       <Lock size={14} className="mt-1 text-indigo-400" />
-                       <span><strong>Security:</strong> Strict server-side rules ensure you can only delete messages you actually sent.</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                       <Globe size={14} className="mt-1 text-indigo-400" />
-                       <span><strong>Channels:</strong> Dedicated spaces for Global Broadcasts, specific Teams, and Private DMs.</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                       <Trash2 size={14} className="mt-1 text-indigo-400" />
-                       <span><strong>Auto-Cleanup:</strong> The system automatically wipes messages older than 36 hours to keep things fast.</span>
-                   </li>
-                </ul>
+               <p className="text-sm text-slate-400 mb-4">
+                  <strong>Right-Click</strong> (Desktop) or <strong>Long-Press</strong> (Mobile) on any message bubble to open the menu.
+               </p>
+               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
+                     <Reply size={16} className="text-indigo-400" />
+                     <span className="text-[10px] font-bold text-slate-300">Reply</span>
+                     <span className="text-[9px] text-slate-500 text-center">Quote a specific text</span>
+                  </div>
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
+                     <Pencil size={16} className="text-amber-400" />
+                     <span className="text-[10px] font-bold text-slate-300">Edit</span>
+                     <span className="text-[9px] text-slate-500 text-center">Fix typos (Yours only)</span>
+                  </div>
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
+                     <Copy size={16} className="text-cyan-400" />
+                     <span className="text-[10px] font-bold text-slate-300">Copy</span>
+                     <span className="text-[9px] text-slate-500 text-center">Save text to clipboard</span>
+                  </div>
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
+                     <Trash2 size={16} className="text-rose-400" />
+                     <span className="text-[10px] font-bold text-slate-300">Delete</span>
+                     <span className="text-[9px] text-slate-500 text-center">Remove (Yours only)</span>
+                  </div>
+               </div>
             </div>
+          </section>
+
+          {/* Section 5: Batch & Notifications */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+               <span className="text-emerald-400 font-mono text-sm">05</span>
+               <h4 className="text-lg font-bold text-slate-200">Power Tools</h4>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-fuchsia-400"><CheckSquare size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200 mb-1">Multi-Select Mode</h5>
+                  <p className="text-xs text-slate-400">
+                     Long-press a message to enter selection mode. Tap other messages to add them. You can then <strong>Batch Copy</strong> or <strong>Batch Delete</strong> everything at once.
+                  </p>
+               </div>
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-red-400"><Bell size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200 mb-1">Notification Center</h5>
+                  <p className="text-xs text-slate-400">
+                     Click the Bell icon to see recent alerts. The "Clear All" button wipes the list clean, but your chat history remains safe inside the drawer.
+                  </p>
+               </div>
+            </div>
+          </section>
+
+          {/* Technical Footnote */}
+          <section className="mt-8 border-t border-slate-800 pt-6">
+             <div className="flex items-center gap-2 mb-3 opacity-50">
+               <Server size={14} />
+               <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Technical Specs</h4>
+            </div>
+            <p className="text-[10px] text-slate-600 font-mono leading-relaxed">
+               • Powered by single-stream Firestore listeners for battery efficiency.<br/>
+               • Messages are auto-cleaned after 36 hours.<br/>
+               • Secure "Sender Verification" prevents unauthorized deletion.<br/>
+               • LocalStorage handles "Read Receipts" privately on your device.
+            </p>
           </section>
 
         </div>
@@ -1042,7 +1098,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] text-slate-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
-
       
       {/* User Guide Modal */}
       <UserGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
