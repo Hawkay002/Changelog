@@ -4,19 +4,74 @@ import {
   FileText, Code, GitCommit, ChevronDown, ChevronUp, Globe,
   Server, Lock, Search, Users, Activity, Cpu, HardDrive,
   Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, 
-  Bell, BookOpen, X, MousePointer2, Volume2, Eye, Reply, Copy, Pencil, Trash2
+  Bell, BookOpen, X, MousePointer2, Volume2, Eye, Reply, Copy, Pencil, Trash2,
+  Layers, CheckSquare, Eraser, Calendar
 } from 'lucide-react';
 
 // --- Data Configuration ---
 
 const globalStats = [
-  { label: "Total Builds", value: "45", icon: <GitCommit size={16} />, color: "text-blue-400" },
-  { label: "Major Versions", value: "8", icon: <Hash size={16} />, color: "text-purple-400" },
-  { label: "Files Managed", value: "16", icon: <FileCode size={16} />, color: "text-emerald-400" },
+  { label: "Total Builds", value: "48", icon: <GitCommit size={16} />, color: "text-blue-400" },
+  { label: "Major Versions", value: "9", icon: <Hash size={16} />, color: "text-purple-400" },
+  { label: "Files Managed", value: "17", icon: <FileCode size={16} />, color: "text-emerald-400" },
   { label: "Uptime", value: "100%", icon: <Activity size={16} />, color: "text-rose-400" },
 ];
 
 const changelogData = [
+  {
+    majorVersion: "5.5",
+    releaseName: "Nightcore Interaction",
+    date: "Jan 05, 2026",
+    time: "11:35 IST",
+    description: "Major interaction overhaul introducing multi-select batch operations, adaptive context menus, and a 'Smart' notification system with local-first read states.",
+    stats: [
+      { label: "Selection", value: "Multi", desc: "Long Press" },
+      { label: "Actions", value: "Batch", desc: "Copy/Delete" },
+      { type: "guide_button" }
+    ],
+    highlightColor: "text-orange-400",
+    borderColor: "border-orange-500/20",
+    subVersions: [
+      {
+        version: "5.5.0",
+        title: "Chat Interaction Engine",
+        type: "Feature",
+        severity: "Major",
+        icon: <Layers size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Multi-Select Mode", detail: "Long-press (0.6s) triggers selection mode with blue tint styling." },
+          { tag: "Feature", desc: "Batch Actions", detail: "Added aggregate Copy (formatted) and atomic Batch Delete." },
+          { tag: "UX", desc: "Adaptive Menus", detail: "Switches between Context Menu (Single) and Toolbar (Multi)." },
+          { tag: "Fix", desc: "Syntax Resolution", detail: "Fixed global scope variable duplication for 'isChatOpen'." }
+        ]
+      },
+      {
+        version: "5.4.0",
+        title: "Notification Hygiene",
+        type: "Feature",
+        severity: "Enhancement",
+        icon: <Bell size={16} />,
+        changes: [
+          { tag: "Feature", desc: "Dynamic Read Status", detail: "Visual grey/blue state based on localStorage vs message timestamp." },
+          { tag: "Feature", desc: "Bulk Clear", detail: "Added 'Clear All' button that masks old notifications via timestamp." },
+          { tag: "UX", desc: "Instant Feedback", detail: "Clicking notification immediately removes unread styling." }
+        ]
+      },
+      {
+        version: "5.3.5",
+        title: "Backend & Polish",
+        type: "Security",
+        severity: "Enhancement",
+        icon: <ShieldCheck size={16} />,
+        changes: [
+          { tag: "Security", desc: "Strict Delete Rules", detail: "Server-side check: Sender must match Auth Token." },
+          { tag: "Performance", desc: "Fetch Optimization", detail: "Increased history limit to 300 messages." },
+          { tag: "Logic", desc: "Data Retention", detail: "Auto-cleanup extended to 36 hours." },
+          { tag: "UI", desc: "Date Separators", detail: "Injected 'Today/Yesterday' pills between message groups." }
+        ]
+      }
+    ]
+  },
   {
     majorVersion: "5.0",
     releaseName: "Intelligence & Optimization",
@@ -26,7 +81,7 @@ const changelogData = [
     stats: [
       { label: "Typing", value: "<2s", desc: "Heartbeat Sync" },
       { label: "Unread", value: "Smart", desc: "Time-based" },
-      { type: "guide_button" }
+      { label: "Audio", value: "Context", desc: "Conditional" }
     ],
     highlightColor: "text-fuchsia-400",
     borderColor: "border-fuchsia-500/20",
@@ -851,8 +906,8 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                 <BookOpen size={20} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Comms Center Guide</h3>
-                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Event Ticketing System</p>
+                <h3 className="text-xl font-bold text-white">Comms Center Technical Manual</h3>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Architecture & Features</p>
               </div>
            </div>
            <button onClick={onClose} className="text-slate-500 hover:text-white hover:bg-slate-800 p-2 rounded-lg transition-colors">
@@ -863,136 +918,88 @@ const UserGuideModal = ({ isOpen, onClose }) => {
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           
-          {/* Section 1: Interface */}
+          {/* Section 1: Architecture */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">01</span>
-               <h4 className="text-lg font-bold text-slate-200">Interface Structure</h4>
+               <h4 className="text-lg font-bold text-slate-200">System Architecture</h4>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+            <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
                 <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
-                  <Layout size={14} /> The Drawer
+                  <Database size={14} /> Data Flow
                 </div>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  The chat lives in a persistent slide-out drawer on the right. You can toggle it anytime without losing your draft or place in the conversation.
-                </p>
-              </div>
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                 <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
-                  <Eye size={14} /> Two Views
-                </div>
-                <ul className="text-sm text-slate-400 space-y-1.5 list-disc pl-4">
-                  <li><strong className="text-slate-200">Channel List:</strong> The "Home" view showing all conversations.</li>
-                  <li><strong className="text-slate-200">Active Chat:</strong> The actual messaging window.</li>
+                <ul className="text-sm text-slate-400 space-y-2 list-disc pl-4">
+                   <li><strong>Single Socket:</strong> The app maintains one efficient WebSocket connection to Firestore for all message types.</li>
+                   <li><strong>Smart Filtering:</strong> Fetches last 300 messages and sorts them into buckets (Global, Team, Private) client-side.</li>
+                   <li><strong>Auto-Cleanup:</strong> Admin messages trigger a garbage collection routine that wipes data older than 36 hours.</li>
                 </ul>
-              </div>
             </div>
           </section>
 
-          {/* Section 2: Channels */}
+          {/* Section 2: Smart Deletion */}
           <section>
              <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">02</span>
-               <h4 className="text-lg font-bold text-slate-200">Channel Types</h4>
+               <h4 className="text-lg font-bold text-slate-200">Smart Deletion Security</h4>
             </div>
-             <div className="bg-slate-950/50 rounded-xl border border-slate-800 overflow-hidden divide-y divide-slate-800">
-                <div className="p-4 flex gap-4">
-                   <div className="bg-blue-500/10 p-2 h-fit rounded text-blue-400"><Globe size={16} /></div>
-                   <div>
-                      <h5 className="text-sm font-bold text-slate-200">Global Broadcast</h5>
-                      <p className="text-xs text-slate-500 mt-1">Visible to everyone. Used for general announcements (e.g., "Gate 2 is crowded").</p>
-                   </div>
+             <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                   <h5 className="text-sm font-bold text-slate-200 mb-1 flex items-center gap-2"><Layout size={14} className="text-orange-400"/> Layer 1: UI Masking</h5>
+                   <p className="text-xs text-slate-400 leading-relaxed">
+                      If you select a mix of your messages and others', the Delete button automatically hides. It only appears when you select <i>only</i> your own messages.
+                   </p>
                 </div>
-                <div className="p-4 flex gap-4">
-                   <div className="bg-orange-500/10 p-2 h-fit rounded text-orange-400"><Users size={16} /></div>
-                   <div>
-                      <h5 className="text-sm font-bold text-slate-200">Team Channels</h5>
-                      <p className="text-xs text-slate-500 mt-1">Role-based access. Security sees Security; Reg Desk sees Reg Desk. Admins see all.</p>
-                   </div>
+                 <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                   <h5 className="text-sm font-bold text-slate-200 mb-1 flex items-center gap-2"><ShieldCheck size={14} className="text-emerald-400"/> Layer 2: Hard Rules</h5>
+                   <p className="text-xs text-slate-400 leading-relaxed">
+                      Firestore Security Rules enforce a strict check: <code>request.auth.token.email == resource.data.senderEmail</code>. Even if the UI is bypassed, the server rejects the deletion.
+                   </p>
                 </div>
-                <div className="p-4 flex gap-4">
-                   <div className="bg-pink-500/10 p-2 h-fit rounded text-pink-400"><Lock size={16} /></div>
-                   <div>
-                      <h5 className="text-sm font-bold text-slate-200">Private Channels</h5>
-                      <p className="text-xs text-slate-500 mt-1">Direct Messages (DMs). Admins have a directory of all staff; staff see DMs only after a chat starts.</p>
+             </div>
+          </section>
+
+          {/* Section 3: Notification Logic */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+               <span className="text-emerald-400 font-mono text-sm">03</span>
+               <h4 className="text-lg font-bold text-slate-200">Notification Management</h4>
+            </div>
+             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800 flex gap-4">
+                <div className="bg-indigo-500/10 p-3 h-fit rounded-lg text-indigo-400"><Eraser size={20} /></div>
+                <div>
+                   <h5 className="text-sm font-bold text-slate-200">Local Masking Strategy</h5>
+                   <p className="text-sm text-slate-400 mt-2 leading-relaxed">
+                     We do not delete notifications from the server (which would lose chat history). Instead, we use a <strong>Clear Timestamp</strong> in LocalStorage.
+                   </p>
+                   <div className="mt-3 flex gap-2">
+                      <span className="text-xs bg-slate-900 border border-slate-800 px-2 py-1 rounded text-slate-500 font-mono">timestamp &gt; cleared_at = Visible</span>
+                      <span className="text-xs bg-slate-900 border border-slate-800 px-2 py-1 rounded text-slate-500 font-mono">timestamp &lt; cleared_at = Hidden</span>
                    </div>
                 </div>
              </div>
           </section>
 
-          {/* Section 3: Core Features */}
-          <section>
-            <div className="flex items-center gap-2 mb-4">
-               <span className="text-emerald-400 font-mono text-sm">03</span>
-               <h4 className="text-lg font-bold text-slate-200">Core Interaction</h4>
-            </div>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                 <div className="mb-3 text-cyan-400"><MousePointer2 size={20} /></div>
-                 <h5 className="text-sm font-bold text-slate-200 mb-2">Context Menu</h5>
-                 <p className="text-xs text-slate-400 mb-4">Right-click or Long-press on any message to access:</p>
-                 
-                 <div className="flex items-center justify-between gap-2">
-                    <div className="flex flex-col items-center gap-1 group">
-                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-colors">
-                          <Reply size={14} className="text-slate-400 group-hover:text-indigo-400" />
-                       </div>
-                       <span className="text-[10px] text-slate-500 font-medium">Reply</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 group">
-                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-colors">
-                          <Copy size={14} className="text-slate-400 group-hover:text-indigo-400" />
-                       </div>
-                       <span className="text-[10px] text-slate-500 font-medium">Copy</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 group">
-                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-colors">
-                          <Pencil size={14} className="text-slate-400 group-hover:text-indigo-400" />
-                       </div>
-                       <span className="text-[10px] text-slate-500 font-medium">Edit</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 group">
-                       <div className="p-2 rounded bg-slate-900 border border-slate-800 group-hover:border-rose-500/50 group-hover:bg-rose-500/10 transition-colors">
-                          <Trash2 size={14} className="text-slate-400 group-hover:text-rose-400" />
-                       </div>
-                       <span className="text-[10px] text-slate-500 font-medium">Delete</span>
-                    </div>
-                 </div>
-              </div>
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                 <div className="mb-3 text-cyan-400"><MessageSquare size={20} /></div>
-                 <h5 className="text-sm font-bold text-slate-200 mb-1">Reply & Edit</h5>
-                 <p className="text-xs text-slate-400">Reply to specific messages to create context quotes. Edit your own messages to fix typos in real-time.</p>
-              </div>
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                 <div className="mb-3 text-cyan-400"><Activity size={20} /></div>
-                 <h5 className="text-sm font-bold text-slate-200 mb-1">Typing Indicators</h5>
-                 <p className="text-xs text-slate-400">See when others are typing via the "..." animation. Powered by a heartbeat system (updates every 2s).</p>
-              </div>
-            </div>
-          </section>
-
-           {/* Section 4: Notifications */}
+           {/* Section 4: Interaction */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">04</span>
-               <h4 className="text-lg font-bold text-slate-200">Notification System</h4>
+               <h4 className="text-lg font-bold text-slate-200">Batch & Interaction</h4>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-               <div className="flex-1 bg-gradient-to-br from-slate-900 to-slate-950 p-4 rounded-xl border border-slate-800 flex gap-4 items-center">
-                  <div className="bg-red-500/20 text-red-500 p-3 rounded-full"><Bell size={20} /></div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white">Smart Badge</h5>
-                    <p className="text-xs text-slate-400">Red counter shows unread messages across all channels.</p>
-                  </div>
+            <div className="grid md:grid-cols-3 gap-4">
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-fuchsia-400"><CheckSquare size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200">Multi-Select</h5>
+                  <p className="text-xs text-slate-400">Long press (0.6s) on any bubble to enter selection mode.</p>
                </div>
-               <div className="flex-1 bg-gradient-to-br from-slate-900 to-slate-950 p-4 rounded-xl border border-slate-800 flex gap-4 items-center">
-                  <div className="bg-purple-500/20 text-purple-500 p-3 rounded-full"><Volume2 size={20} /></div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white">Adaptive Chime</h5>
-                    <p className="text-xs text-slate-400">Subtle sound plays only if the chat drawer is closed.</p>
-                  </div>
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-cyan-400"><Layout size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200">Adaptive UI</h5>
+                  <p className="text-xs text-slate-400">1 Item = Context Menu. 2+ Items = Top Batch Toolbar.</p>
+               </div>
+               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                  <div className="mb-2 text-emerald-400"><Calendar size={18} /></div>
+                  <h5 className="text-sm font-bold text-slate-200">Time Pills</h5>
+                  <p className="text-xs text-slate-400">"Today" / "Yesterday" separators injected dynamically.</p>
                </div>
             </div>
           </section>
@@ -1002,7 +1009,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
         {/* Footer Actions */}
         <div className="p-4 border-t border-slate-800 bg-slate-950 flex justify-end">
            <button onClick={onClose} className="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-semibold transition-colors">
-             Got it
+             Close Manual
            </button>
         </div>
       </div>
@@ -1040,7 +1047,7 @@ const App = () => {
                </div>
                <div className="flex items-center gap-2">
                  <HardDrive size={14} />
-                 <span>v5.2.0</span>
+                 <span>v5.5.0</span>
                </div>
                <div className="flex items-center gap-2">
                  <Cpu size={14} />
