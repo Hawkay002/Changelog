@@ -5,7 +5,7 @@ import {
   Server, Lock, Search, Users, Activity, Cpu, HardDrive,
   Clock, Hash, FileCode, AlertCircle, CheckCircle2, MessageSquare, 
   Bell, BookOpen, X, MousePointer2, Volume2, Eye, Reply, Copy, Pencil, Trash2,
-  Layers, CheckSquare, Eraser, Calendar, Filter, Send, Menu, Info
+  Layers, CheckSquare, Eraser, Calendar, Filter, Send, Menu, Info, ArrowRight, User
 } from 'lucide-react';
 
 // --- Data Configuration ---
@@ -907,7 +907,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Comms Center User Manual</h3>
-                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Complete Guide</p>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Comprehensive Guide</p>
               </div>
            </div>
            <button onClick={onClose} className="text-slate-500 hover:text-white hover:bg-slate-800 p-2 rounded-lg transition-colors">
@@ -916,7 +916,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-8">
+        <div className="flex-1 overflow-y-auto p-6 space-y-12">
           
           {/* Section 1: Intro */}
           <section>
@@ -972,7 +972,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                    <div>
                       <h5 className="text-sm font-bold text-slate-200">Private Chats</h5>
                       <p className="text-xs text-slate-500 mt-1">
-                        Direct 1-on-1 messages. Admins have a full staff directory. Staff members see private chats only after a conversation has started.
+                        Direct 1-on-1 messages. Admins have a full directory of staff to start chats. Staff see private chats only after a conversation has started.
                       </p>
                    </div>
                 </div>
@@ -985,25 +985,64 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                <span className="text-emerald-400 font-mono text-sm">03</span>
                <h4 className="text-lg font-bold text-slate-200">Messaging Basics</h4>
             </div>
-            <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                   <div>
-                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Send size={14} className="text-cyan-400"/> Sending Messages</h5>
-                      <p className="text-xs text-slate-400 leading-relaxed mb-3">
-                         Type in the input field at the bottom. Press <strong>Enter</strong> or click the <strong>Paper Plane</strong> icon to send.
-                      </p>
-                      <ul className="text-xs text-slate-500 space-y-1 pl-2 border-l border-slate-800">
-                        <li>• Blue bubbles are sent by <strong>You</strong>.</li>
-                        <li>• Grey bubbles are from <strong>Others</strong>.</li>
-                        <li>• "Today" / "Yesterday" separators appear automatically.</li>
-                      </ul>
-                   </div>
-                   <div>
-                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Activity size={14} className="text-fuchsia-400"/> Real-Time Indicators</h5>
-                      <p className="text-xs text-slate-400 leading-relaxed mb-3">
-                         The system is alive. You will see a <strong>"..." animation</strong> above the input box when someone is typing in your current channel.
-                      </p>
-                   </div>
+            
+            <div className="bg-slate-950/50 p-6 rounded-xl border border-slate-800 relative overflow-hidden">
+                {/* Visual Chat Demo */}
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                    <MessageSquare size={120} />
+                </div>
+
+                <div className="flex flex-col gap-6 relative z-10">
+                    
+                    {/* Visual 1: Separators */}
+                    <div className="flex flex-col gap-2">
+                        <div className="flex items-center justify-center">
+                            <span className="bg-slate-800/50 text-slate-500 text-[10px] px-3 py-1 rounded-full font-mono uppercase tracking-widest">Today</span>
+                        </div>
+                        <p className="text-xs text-center text-slate-500 mb-2">Time separators appear automatically based on message timestamps.</p>
+                    </div>
+
+                    {/* Visual 2: Bubbles */}
+                    <div className="space-y-4">
+                        <div className="flex items-start gap-3">
+                            <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-500">
+                                <User size={14} />
+                            </div>
+                            <div className="flex flex-col gap-1 max-w-[80%]">
+                                <div className="bg-slate-800 text-slate-300 text-sm px-3 py-2 rounded-2xl rounded-tl-none">
+                                    Hey! Are the VIP gates open yet?
+                                </div>
+                                <span className="text-[10px] text-slate-500 pl-1">Received • 10:45 AM</span>
+                            </div>
+                        </div>
+
+                        <div className="flex items-start justify-end gap-3">
+                            <div className="flex flex-col items-end gap-1 max-w-[80%]">
+                                <div className="bg-blue-600/20 text-blue-200 text-sm px-3 py-2 rounded-2xl rounded-tr-none border border-blue-500/20">
+                                    Yes, they opened 5 mins ago.
+                                </div>
+                                <span className="text-[10px] text-slate-500 pr-1">Sent by You • 10:46 AM</span>
+                            </div>
+                            <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
+                                <User size={14} />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Visual 3: Input Area */}
+                    <div className="mt-4 pt-4 border-t border-slate-800/50">
+                        <div className="flex items-center gap-2">
+                            <div className="h-2 w-2 bg-slate-600 rounded-full animate-bounce"></div>
+                            <div className="h-2 w-2 bg-slate-600 rounded-full animate-bounce delay-75"></div>
+                            <div className="h-2 w-2 bg-slate-600 rounded-full animate-bounce delay-150"></div>
+                            <span className="text-xs text-slate-500 ml-2">Someone is typing...</span>
+                        </div>
+                        <div className="mt-2 bg-slate-900 border border-slate-800 rounded-lg p-3 flex justify-between items-center text-slate-500 text-sm">
+                            <span>Type a message...</span>
+                            <Send size={14} />
+                        </div>
+                    </div>
+
                 </div>
             </div>
           </section>
@@ -1017,25 +1056,29 @@ const UserGuideModal = ({ isOpen, onClose }) => {
             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
                <div className="mb-4">
                   <h5 className="text-sm font-bold text-slate-200 mb-1">Context Menu</h5>
-                  <p className="text-xs text-slate-400"><strong>Right-Click</strong> (Desktop) or <strong>Long-Press</strong> (Mobile) on any message.</p>
+                  <p className="text-xs text-slate-400"><strong>Right-Click</strong> (Desktop) or <strong>Long-Press</strong> (Mobile) on any message bubble to open the menu.</p>
                </div>
                
                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
-                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1">
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
                      <Reply size={16} className="text-indigo-400" />
                      <span className="text-[10px] font-bold text-slate-300">Reply</span>
+                     <span className="text-[9px] text-slate-500 text-center">Quote a specific text</span>
                   </div>
-                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1">
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
+                     <Pencil size={16} className="text-amber-400" />
+                     <span className="text-[10px] font-bold text-slate-300">Edit</span>
+                     <span className="text-[9px] text-slate-500 text-center">Fix typos (Yours only)</span>
+                  </div>
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
                      <Copy size={16} className="text-cyan-400" />
                      <span className="text-[10px] font-bold text-slate-300">Copy</span>
+                     <span className="text-[9px] text-slate-500 text-center">Save text to clipboard</span>
                   </div>
-                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1">
-                     <Pencil size={16} className="text-amber-400" />
-                     <span className="text-[10px] font-bold text-slate-300">Edit (Yours)</span>
-                  </div>
-                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1">
+                  <div className="bg-slate-900 border border-slate-800 p-2 rounded flex flex-col items-center gap-1 group">
                      <Trash2 size={16} className="text-rose-400" />
-                     <span className="text-[10px] font-bold text-slate-300">Delete (Yours)</span>
+                     <span className="text-[10px] font-bold text-slate-300">Delete</span>
+                     <span className="text-[9px] text-slate-500 text-center">Remove (Yours only)</span>
                   </div>
                </div>
 
@@ -1180,4 +1223,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 
