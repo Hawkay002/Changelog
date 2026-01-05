@@ -906,8 +906,8 @@ const UserGuideModal = ({ isOpen, onClose }) => {
                 <BookOpen size={20} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Comms Center: Under the Hood</h3>
-                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Technical Manual</p>
+                <h3 className="text-xl font-bold text-white">Comms Center</h3>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">User & Feature Guide</p>
               </div>
            </div>
            <button onClick={onClose} className="text-slate-500 hover:text-white hover:bg-slate-800 p-2 rounded-lg transition-colors">
@@ -918,111 +918,109 @@ const UserGuideModal = ({ isOpen, onClose }) => {
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           
-          {/* Section 1: Architecture */}
+          {/* Feature Highlight: Multi-Select */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">01</span>
-               <h4 className="text-lg font-bold text-slate-200">Core Architecture (The Brain)</h4>
+               <h4 className="text-lg font-bold text-slate-200">Messaging: Multi-Select & Batch Actions</h4>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
-                  <Database size={14} /> Single-Stream Model
+            <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                <div className="flex gap-4">
+                    <div className="bg-indigo-500/10 p-3 h-fit rounded-lg text-indigo-400">
+                        <CheckSquare size={24} />
+                    </div>
+                    <div>
+                        <h5 className="text-sm font-bold text-slate-200 mb-2">Long Press to Select</h5>
+                        <p className="text-sm text-slate-400 leading-relaxed mb-4">
+                            Just like your favorite messaging apps, you can now manage multiple messages at once. <strong>Long press (0.6s)</strong> on any message bubble to enter selection mode. Tap other messages to add them to your selection.
+                        </p>
+                        <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-slate-900 border border-slate-800 p-3 rounded flex items-center gap-3">
+                                <Copy size={16} className="text-cyan-400" />
+                                <div>
+                                    <div className="text-xs font-bold text-slate-300">Batch Copy</div>
+                                    <div className="text-[10px] text-slate-500">Copies all selected texts to clipboard.</div>
+                                </div>
+                            </div>
+                            <div className="bg-slate-900 border border-slate-800 p-3 rounded flex items-center gap-3">
+                                <Trash2 size={16} className="text-rose-400" />
+                                <div>
+                                    <div className="text-xs font-bold text-slate-300">Batch Delete</div>
+                                    <div className="text-[10px] text-slate-500">Instantly removes selected messages.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  Unlike apps that open connections per user, the system maintains <strong>one single WebSocket connection</strong> (<code>setupChatListener</code>) to Firestore. It fetches the most recent 300 messages in one pipe and filters them locally using <code>processAllMessages()</code>, saving battery and bandwidth.
-                </p>
-              </div>
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                 <div className="flex items-center gap-2 text-indigo-400 mb-2 font-bold text-sm uppercase">
-                  <Cpu size={14} /> Local Data Bucket
-                </div>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  The "RAM" of the chat is the <code>allMessages</code> array. Every database update overwrites this array. The processor function then immediately sorts these raw messages into <strong>Global</strong>, <strong>Team</strong>, and <strong>Private</strong> buckets on the fly based on <code>channelType</code>.
-                </p>
-              </div>
             </div>
           </section>
 
-          {/* Section 2: Routing */}
+          {/* Feature Highlight: Smart Notifications */}
           <section>
              <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">02</span>
-               <h4 className="text-lg font-bold text-slate-200">Channel Routing Logic</h4>
+               <h4 className="text-lg font-bold text-slate-200">Smart Notifications</h4>
             </div>
-             <div className="bg-slate-950/50 rounded-xl border border-slate-800 overflow-hidden divide-y divide-slate-800">
-                <div className="p-4 flex gap-4">
-                   <div className="bg-blue-500/10 p-2 h-fit rounded text-blue-400"><Globe size={16} /></div>
-                   <div>
-                      <h5 className="text-sm font-bold text-slate-200">Global & Team</h5>
-                      <p className="text-xs text-slate-500 mt-1">Global messages map to key <code>GLOBAL_ALL</code>. Team messages use <code>TEAM_targetEmail</code>. Staff only see teams matching their email, while Admins see all.</p>
-                   </div>
+             <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                   <div className="mb-3 text-cyan-400"><Bell size={20} /></div>
+                   <h5 className="text-sm font-bold text-slate-200 mb-1">Dynamic Read Status</h5>
+                   <p className="text-xs text-slate-400 leading-relaxed">
+                      Notifications now intelligently turn from <strong>Blue (Unread)</strong> to <strong>Grey (Read)</strong>. The system tracks when you last opened a chat and only highlights truly new messages.
+                   </p>
                 </div>
-                <div className="p-4 flex gap-4">
-                   <div className="bg-pink-500/10 p-2 h-fit rounded text-pink-400"><Lock size={16} /></div>
-                   <div>
-                      <h5 className="text-sm font-bold text-slate-200">Smart Private View</h5>
-                      <p className="text-xs text-slate-500 mt-1">
-                        Solves the "Sender/Receiver" dilemma. The logic groups messages by the *other* person. If Admin looks, it groups by "John"; if John looks, it groups by "Admin", creating a seamless thread key <code>PRIVATE_username</code>.
-                      </p>
-                   </div>
+                 <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                   <div className="mb-3 text-emerald-400"><Eraser size={20} /></div>
+                   <h5 className="text-sm font-bold text-slate-200 mb-1">Bulk Clear</h5>
+                   <p className="text-xs text-slate-400 leading-relaxed">
+                      Overwhelmed? Use the <strong>"Clear All"</strong> button in the notification dropdown to instantly wipe your alert history without deleting the actual chat conversations.
+                   </p>
                 </div>
              </div>
           </section>
 
-          {/* Section 3: Notification Logic */}
+          {/* Feature Highlight: Typing Indicators */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">03</span>
-               <h4 className="text-lg font-bold text-slate-200">Notification System (Local Masking)</h4>
+               <h4 className="text-lg font-bold text-slate-200">Real-Time Presence</h4>
             </div>
-             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                <div className="flex flex-col sm:flex-row gap-6">
-                   <div className="flex-1">
-                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Bell size={14} className="text-red-400"/> Unread Counters</h5>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                         The app compares message timestamps against a stored <code>lastRead_CHANNEL_KEY</code> timestamp in <code>localStorage</code>. If <code>msg.timestamp &gt; lastRead</code>, it increments the badge and plays a chime.
-                      </p>
-                   </div>
-                   <div className="w-px bg-slate-800 hidden sm:block"></div>
-                   <div className="flex-1">
-                      <h5 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2"><Eraser size={14} className="text-purple-400"/> The "Clear All" Trick</h5>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                         Clearing notifications doesn't delete messages. It saves a <code>notifs_cleared_timestamp</code>. The dropdown filter simply hides any notification older than this timestamp, keeping history safe.
-                      </p>
-                   </div>
+             <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800 flex gap-4 items-center">
+                <div className="bg-fuchsia-500/10 p-3 h-fit rounded-lg text-fuchsia-400"><Activity size={24} /></div>
+                <div>
+                   <h5 className="text-sm font-bold text-slate-200">Typing Indicators</h5>
+                   <p className="text-sm text-slate-400 mt-1 leading-relaxed">
+                     See exactly when someone is replying. A sleek <strong>"..." animation</strong> appears in real-time above the chat input when another user is typing in your current channel.
+                   </p>
                 </div>
              </div>
           </section>
 
-           {/* Section 4: Interaction */}
+           {/* Core: Architecture (Brief) */}
           <section>
             <div className="flex items-center gap-2 mb-4">
                <span className="text-emerald-400 font-mono text-sm">04</span>
-               <h4 className="text-lg font-bold text-slate-200">Interactive Features</h4>
+               <h4 className="text-lg font-bold text-slate-200">Core Architecture</h4>
             </div>
-            <div className="grid md:grid-cols-3 gap-4">
-               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                  <div className="mb-2 text-fuchsia-400"><CheckSquare size={18} /></div>
-                  <h5 className="text-sm font-bold text-slate-200 mb-1">Smart Selection</h5>
-                  <p className="text-xs text-slate-400">
-                    <code>updateSelectionMenu()</code> checks ownership. If you select a message you didn't send (<code>senderEmail !== currentUser.email</code>), the Delete button is hidden via <code>display: none</code>.
-                  </p>
-               </div>
-               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                  <div className="mb-2 text-cyan-400"><Activity size={18} /></div>
-                  <h5 className="text-sm font-bold text-slate-200 mb-1">Live Presence</h5>
-                  <p className="text-xs text-slate-400">
-                    Typing indicators write to <code>typing_status</code> collection. Sender logic is throttled (2s). Receiver logic only shows animation if timestamp is "fresh" (&lt;3s).
-                  </p>
-               </div>
-               <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                  <div className="mb-2 text-emerald-400"><Trash2 size={18} /></div>
-                  <h5 className="text-sm font-bold text-slate-200 mb-1">Auto-Cleanup</h5>
-                  <p className="text-xs text-slate-400">
-                    <code>cleanUpOldMessages()</code> runs on Admin message send. It queries for <code>timestamp &lt; (now - 36h)</code> and executes a batch delete to maintain DB health.
-                  </p>
-               </div>
+            <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-400">
+                   <li className="flex items-start gap-2">
+                       <Database size={14} className="mt-1 text-indigo-400" />
+                       <span><strong>Single-Stream:</strong> One efficient connection handles Global, Team, and Private chats to save battery.</span>
+                   </li>
+                   <li className="flex items-start gap-2">
+                       <Lock size={14} className="mt-1 text-indigo-400" />
+                       <span><strong>Security:</strong> Strict server-side rules ensure you can only delete messages you actually sent.</span>
+                   </li>
+                   <li className="flex items-start gap-2">
+                       <Globe size={14} className="mt-1 text-indigo-400" />
+                       <span><strong>Channels:</strong> Dedicated spaces for Global Broadcasts, specific Teams, and Private DMs.</span>
+                   </li>
+                   <li className="flex items-start gap-2">
+                       <Trash2 size={14} className="mt-1 text-indigo-400" />
+                       <span><strong>Auto-Cleanup:</strong> The system automatically wipes messages older than 36 hours to keep things fast.</span>
+                   </li>
+                </ul>
             </div>
           </section>
 
@@ -1031,7 +1029,7 @@ const UserGuideModal = ({ isOpen, onClose }) => {
         {/* Footer Actions */}
         <div className="p-4 border-t border-slate-800 bg-slate-950 flex justify-end">
            <button onClick={onClose} className="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-semibold transition-colors">
-             Close Manual
+             Close Guide
            </button>
         </div>
       </div>
